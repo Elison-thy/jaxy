@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elephante Commons | Where Innovation Meets Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f4ff;
+            color: #1a1a2e;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f0ecf8; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #2c7a4d, #c7a252); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 5px;
+        }
+
+        /* ===== NAVBAR — FIXED TO TOP ===== */
+        .navbar {
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(16px);
+            margin: 0;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #e8ddd0;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+        .logo .highlight {
+            color: #c0392b;
+        }
+
+        /* ===== NAV LINKS ===== */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(232, 221, 208, 0.7);
+            padding: 8px 18px;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+        .nav-links a.active {
+            color: #ffffff;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        .nav-links a.cta-nav {
+            background: linear-gradient(135deg, #c0392b, #e8433a);
+            color: white;
+            padding: 8px 24px;
+        }
+        .nav-links a.cta-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 5px;
+            background: transparent;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #e8ddd0;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(26, 35, 50, 0.98);
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            gap: 6px;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(232, 221, 208, 0.7);
+            padding: 10px 18px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .mobile-menu a:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.05);
+        }
+        .mobile-menu a.active {
+            color: #ffffff;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        .mobile-menu a.cta-nav {
+            background: linear-gradient(135deg, #c0392b, #e8433a);
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+        }
+        .mobile-menu a.cta-nav:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #f8f0f5 0%, #f0ecf8 40%, #e8f0f8 100%);
+            padding: 40px 30px;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(44, 122, 77, 0.1);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(44,122,77,0.06), transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(199,162,82,0.05), transparent 70%);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #000000;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-text h1 .highlight-pink { 
+            color: #e87a9e; 
+        }
+        .hero-text h1 .highlight-blue { 
+            color: #e87a9e; 
+        }
+        .hero-text h1 .normal-text {
+            color: #000000;
+        }
+        .hero-text p {
+            color: rgba(26,26,46,0.6);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-text .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-text .badge-group span {
+            background: rgba(255,255,255,0.6);
+            padding: 6px 18px;
+            font-size: 0.8rem;
+            color: rgba(26,26,46,0.6);
+            border: 1px solid rgba(44,122,77,0.1);
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 44px;
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(44,122,77,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 45px rgba(44,122,77,0.3);
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 14px 36px;
+            background: transparent;
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid rgba(26,26,46,0.1);
+            transition: all 0.4s ease;
+            margin-left: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-outline:hover {
+            border-color: #2c7a4d;
+            color: #2c7a4d;
+            background: rgba(44,122,77,0.05);
+        }
+
+        .hero-images {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .hero-images .img-row {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            justify-content: center;
+        }
+        .hero-images img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hero-images img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        .hero-images .img-label {
+            width: 100%;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: rgba(26,26,46,0.5);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        .section-title .pink { color: #2c7a4d; }
+        .section-title .blue { color: #c7a252; }
+        .section-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #2c7a4d, #c7a252);
+            margin: 12px auto 30px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: rgba(26,26,46,0.5);
+            max-width: 650px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
+        }
+
+        /* ===== FEATURES ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0;
+            margin: 0;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            padding: 36px 28px;
+            text-align: center;
+            border: 1px solid rgba(44,122,77,0.08);
+            border-right: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .feature-card:last-child {
+            border-right: 1px solid rgba(44,122,77,0.08);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(44,122,77,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+        }
+        .feature-card .icon {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: rgba(26,26,46,0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== GALLERY ===== */
+        .image-showcase {
+            margin: 0;
+            padding: 40px 0;
+            border-top: 1px solid rgba(44,122,77,0.08);
+            border-bottom: 1px solid rgba(44,122,77,0.08);
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0;
+            margin-top: 30px;
+        }
+        .image-card {
+            background: rgba(255,255,255,0.7);
+            overflow: hidden;
+            border: 1px solid rgba(44,122,77,0.08);
+            border-right: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .image-card:last-child {
+            border-right: 1px solid rgba(44,122,77,0.08);
+        }
+        .image-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(199,162,82,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+        }
+        .image-card .image-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: #1a1a2e;
+        }
+        .image-card .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .image-card:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+        .image-card .image-info {
+            padding: 20px 24px;
+        }
+        .image-card .image-info h4 {
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .image-card .image-info p {
+            color: rgba(26,26,46,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* ===== INNOVATION AREAS ===== */
+        .innovation-areas {
+            background: rgba(255,255,255,0.5);
+            padding: 50px 40px;
+            margin: 0;
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .pillars-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pillar-tag {
+            background: rgba(255,255,255,0.6);
+            padding: 10px 24px;
+            font-weight: 600;
+            color: rgba(26,26,46,0.7);
+            border: 1px solid rgba(44,122,77,0.06);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        .pillar-tag:hover {
+            background: linear-gradient(135deg, rgba(44,122,77,0.08), rgba(199,162,82,0.08));
+            border-color: #2c7a4d;
+            transform: translateY(-3px);
+        }
+
+        /* ===== PARTNERS ===== */
+        .partners-section {
+            background: rgba(255,255,255,0.5);
+            padding: 50px 40px;
+            margin: 0;
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .partner-logos .logo-item {
+            background: rgba(255,255,255,0.6);
+            padding: 12px 24px;
+            font-weight: 600;
+            color: rgba(26,26,46,0.6);
+            border: 1px solid rgba(44,122,77,0.06);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .partner-logos .logo-item:hover {
+            background: linear-gradient(135deg, rgba(44,122,77,0.08), rgba(199,162,82,0.08));
+            color: #1a1a2e;
+            border-color: #c7a252;
+        }
+
+        /* ===== SPACES PREVIEW ===== */
+        .spaces-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0;
+            margin: 0;
+        }
+        .space-card {
+            background: rgba(255,255,255,0.7);
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid rgba(44,122,77,0.06);
+            border-right: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .space-card:last-child {
+            border-right: 1px solid rgba(44,122,77,0.06);
+        }
+        .space-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(199,162,82,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+        }
+        .space-card .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .space-card h3 {
+            font-size: 1.2rem;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        .space-card p {
+            color: rgba(26,26,46,0.5);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .space-card .link {
+            display: inline-block;
+            margin-top: 16px;
+            color: #2c7a4d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .space-card .link:hover { text-decoration: underline; }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, #f8f0f5, #f0ecf8);
+            padding: 60px 40px;
+            text-align: center;
+            margin: 0;
+            border-bottom: 1px solid rgba(44,122,77,0.08);
+        }
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+        }
+        .cta-section p {
+            color: rgba(26,26,46,0.5);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.05rem;
+        }
+        .btn-cta {
+            display: inline-block;
+            padding: 18px 52px;
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(44,122,77,0.2);
+        }
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 18px 50px rgba(44,122,77,0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(44,122,77,0.08);
+            margin: 0;
+            color: rgba(26,26,46,0.3);
+            font-size: 0.85rem;
+        }
+        footer i { color: #2c7a4d; }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .footer-links a {
+            color: rgba(26,26,46,0.4);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: #2c7a4d; }
+
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablet */
+        @media (max-width: 850px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 50px 30px;
+                text-align: center;
+            }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-text .badge-group { justify-content: center; }
+            .btn-outline { margin-left: 0; margin-top: 12px; }
+            .section-title { font-size: 2rem; }
+            .hero-images img { width: 120px; height: 120px; }
+            .nav-links a:not(.cta-nav) {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .feature-card { border-right: 1px solid rgba(44,122,77,0.08); }
+            .image-card { border-right: 1px solid rgba(44,122,77,0.08); }
+            .space-card { border-right: 1px solid rgba(44,122,77,0.06); }
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            .hero-text h1 { font-size: 2rem; }
+            .hero { padding: 40px 20px; }
+            .hero-images img { width: 100px; height: 100px; }
+            .image-grid { grid-template-columns: 1fr; }
+            .pillars-grid { gap: 10px; }
+            .pillar-tag { font-size: 0.75rem; padding: 6px 16px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .spaces-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 30px 20px; }
+            .cta-section h2 { font-size: 1.8rem; }
+            .logo { font-size: 1rem; }
+            .logo-img { height: 32px; }
+            .nav-links a.cta-nav {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+            .mobile-menu a { font-size: 0.9rem; padding: 10px 14px; }
+            .feature-card { border-right: 1px solid rgba(44,122,77,0.08); }
+            .image-card { border-right: 1px solid rgba(44,122,77,0.08); }
+            .space-card { border-right: 1px solid rgba(44,122,77,0.06); }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 400px) {
+            .hero-text h1 { font-size: 1.6rem; }
+            .btn-primary { padding: 12px 24px; font-size: 0.9rem; }
+            .btn-outline { padding: 10px 20px; font-size: 0.9rem; }
+            .hero-images img { width: 80px; height: 80px; }
+            .hero-images .img-row { gap: 10px; }
+            .badge-group span { font-size: 0.7rem; padding: 4px 12px; }
+            .section-title { font-size: 1.6rem; }
+            .cta-section h2 { font-size: 1.5rem; }
+            .cta-section p { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="partners/elephante.png" alt="Elephante Commons" class="logo-img">
+            <span>ELEPHANTE <span class="highlight">COMMONS</span></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html" class="active">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="menu.html">MENU</a>
+            <a href="space.html">SPACES</a>
+            <a href="partner.html">PARTNERS</a>
+            <a href="lodge.html">LODGE</a>
+            <a href="connect.html">CONNECT</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="active">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="menu.html">MENU</a>
+            <a href="space.html">SPACES</a>
+            <a href="partner.html">PARTNERS</a>
+            <a href="lodge.html">LODGE</a>
+            <a href="connect.html">CONNECT</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <div class="container">
+        <section class="hero fade-up">
+            <div class="hero-text">
+                <div class="badge-group">
+                    <span><i class="fas fa-heart" style="color:#2c7a4d;"></i> Since 2016</span>
+                    <span><i class="fas fa-map-marker-alt" style="color:#c7a252;"></i> Gulu, Uganda</span>
+                    <span><i class="fas fa-users" style="color:#2c7a4d;"></i> 30+ Partners</span>
+                </div>
+                <h1>
+                    <span class="normal-text">Where</span> 
+                    <span class="highlight-pink">Innovation</span> 
+                    <span class="normal-text">Meets</span> 
+                    <span class="highlight-blue">Community</span>
+                </h1>
+                <p>Gulu's Innovation Incubator & Community Center Hybrid — where local leaders rise, ideas grow, and Northern Uganda thrives.</p>
+                <div>
+                    <a href="menu.html" class="btn-primary">Visit Our Menu</a>
+                    <a href="connect.html" class="btn-outline">Get Involved</a>
+                </div>
+            </div>
+            <div class="hero-images">
+                <div class="img-row">
+                    <img src="partners/maj2.jpg" alt="Community gathering at Elephante Commons">
+                    <img src="partners/maj1.jpg" alt="View Our Menu">
+                </div>
+                <div class="img-row">
+                    <img src="partners/maj3.jpg" alt="Partners collaborating at Elephante">
+                    <img src="partners/maj4.jpg" alt="Community impact in Northern Uganda">
+                </div>
+                <p class="img-label">Building the future of Northern Uganda</p>
+            </div>
+        </section>
+
+        <!-- ===== FEATURES ===== -->
+        <section id="features">
+            <h2 class="section-title fade-up">Why <span class="pink">Elephante</span> <span class="blue">Commons</span></h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle fade-up">We are an innovation incubator and community center hybrid, working alongside local changemakers in Northern Uganda.</p>
+            <div class="features-grid fade-up">
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Innovation Hub</h3>
+                    <p>We nurture creativity, support risk-taking, and build solutions that are sustainable, scalable, and deeply rooted in community wisdom.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>Community Center</h3>
+                    <p>A communal culture requires a communal solution. We are building a family of changemakers committed to the greatest good of Northern Uganda.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-globe-africa"></i></div>
+                    <h3>Local Leadership</h3>
+                    <p>True development thrives when the local community takes the lead. We stand behind local leaders who are stepping up for their community.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== INNOVATION AREAS ===== -->
+        <section class="innovation-areas fade-up">
+            <h2 class="section-title">Our <span class="pink">Innovation</span> Areas</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">All partners must be innovating in at least one of these areas. Most integrate solutions to three or more in a single project!</p>
+            <div class="pillars-grid">
+                <span class="pillar-tag">Business & Job Creation</span>
+                <span class="pillar-tag">Health & Wellness</span>
+                <span class="pillar-tag">Community & Family Connection</span>
+                <span class="pillar-tag">Creative Arts & Culture</span>
+                <span class="pillar-tag">Education & Literacy</span>
+                <span class="pillar-tag">Environment & Sustainability</span>
+                <span class="pillar-tag">Equality & Human Rights</span>
+                <span class="pillar-tag">Gospel Clarity & Biblical Literacy</span>
+            </div>
+        </section>
+
+        <!-- ===== GALLERY ===== -->
+        <section class="image-showcase fade-up" id="gallery">
+            <h2 class="section-title">Stories from the <span class="pink">Commons</span></h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Explore the impact of local leadership and community innovation through our gallery.</p>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-wrapper">
+                        <img src="partners/commu1.jpg" alt="Community in Action">
+                    </div>
+                    <div class="image-info">
+                        <h4>Community in Action</h4>
+                        <p>Local leaders transforming their community through innovation</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <div class="image-wrapper">
+                        <img src="partners/inno1.jpg" alt="Partner Spotlight">
+                    </div>
+                    <div class="image-info">
+                        <h4>Partner Spotlight</h4>
+                        <p>Meet the heroes transforming Northern Uganda</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SPACES ===== -->
+        <section id="spaces">
+            <h2 class="section-title fade-up">Explore Our <span class="pink">Spaces</span></h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle fade-up">From coworking to community events — there's a space for everyone at Elephante.</p>
+            <div class="spaces-grid fade-up">
+                <div class="space-card">
+                    <span class="emoji">💻</span>
+                    <h3>Coworking</h3>
+                    <p>Flexible desks, high-speed WiFi, and a vibrant community of changemakers.</p>
+                    <a href="space.html" class="link">Learn More →</a>
+                </div>
+                <div class="space-card">
+                    <span class="emoji">☕</span>
+                    <h3>Cafe</h3>
+                    <p>Fresh coffee, delicious meals, and a warm atmosphere — the heart of Elephante.</p>
+                    <a href="menu.html" class="link">View Menu →</a>
+                </div>
+                <div class="space-card">
+                    <span class="emoji">🏠</span>
+                    <h3>Lodge</h3>
+                    <p>Comfortable rooms and bunkhouse accommodation for travelers and retreats.</p>
+                    <a href="lodge.html" class="link">Book a Stay →</a>
+                </div>
+                <div class="space-card">
+                    <span class="emoji">🎉</span>
+                    <h3>Events</h3>
+                    <p>Game nights, concerts, workshops, and community gatherings — everyone is welcome.</p>
+                    <a href="https://www.elephantecommons.co.ug/events" class="link">See Events →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PARTNERS ===== -->
+        <section id="partners" class="partners-section fade-up">
+            <h2 class="section-title">Our <span class="pink">Partners</span></h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Common heroes for the common good — leaders transforming Northern Uganda.</p>
+            <div class="partner-logos">
+                <span class="logo-item">HAVEN for humanity</span>
+                <span class="logo-item">Gender Tech</span>
+                <span class="logo-item">Wokober Education</span>
+                <span class="logo-item">River Poultry</span>
+                <span class="logo-item">Ajura Styles</span>
+                <span class="logo-item">Afro Lab</span>
+                <span class="logo-item">Kijani Forestry</span>
+                <span class="logo-item">NUFA</span>
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <a href="partner.html" class="btn-primary" style="padding:12px 36px; font-size:0.9rem;">View All Partners</a>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section id="contact" class="cta-section fade-up">
+            <h2>Join the <span style="color:#2c7a4d;">Movement</span></h2>
+            <p>Whether you're a partner, a supporter, or a dreamer — there's a place for you at Elephante Commons. Together, we build the future of Northern Uganda.</p>
+            <a href="connect.html" class="btn-cta"><i class="fas fa-heart"></i> Get Involved</a>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <p>🐘 Elephante Commons — Where Innovation Meets Community</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="menu.html">Menu</a>
+                <a href="space.html">Spaces</a>
+                <a href="partner.html">Partners</a>
+                <a href="lodge.html">Lodge</a>
+            </div>
+            <p><i class="fas fa-heart"></i> Gulu, Northern Uganda &nbsp;·&nbsp; <i class="fas fa-phone-alt"></i> +256 0782 389 824</p>
+            <p style="font-size:0.75rem; opacity:0.4; margin-top:8px;">Built with love for the community that inspires us every day.</p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== HAMBURGER MENU TOGGLE =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // ===== FADE-UP OBSERVER =====
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('.nav-links a, .footer-links a, .mobile-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href !== '#' && href.startsWith('#')) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        console.log('🐘 Elephante Commons — Where Innovation Meets Community');
+    </script>
+</body>
+</html>

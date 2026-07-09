@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elephante Commons | Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f4ff;
+            color: #1a1a2e;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f0ecf8; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #2c7a4d, #c7a252); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NAVBAR — FIXED TO TOP (matching index) ===== */
+        .navbar {
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(16px);
+            margin: 0;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #e8ddd0;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+        .logo .highlight {
+            color: #c0392b;
+        }
+
+        /* ===== NAV LINKS ===== */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(232, 221, 208, 0.7);
+            padding: 8px 18px;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            position: relative;
+            border-radius: 0;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+        .nav-links a.active {
+            color: #ffffff;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        .nav-links a.cta-nav {
+            background: linear-gradient(135deg, #c0392b, #e8433a);
+            color: white;
+            padding: 8px 24px;
+        }
+        .nav-links a.cta-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 5px;
+            background: transparent;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #e8ddd0;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(26, 35, 50, 0.98);
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            gap: 6px;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(232, 221, 208, 0.7);
+            padding: 10px 18px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-align: center;
+            border-radius: 0;
+        }
+        .mobile-menu a:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.05);
+        }
+        .mobile-menu a.active {
+            color: #ffffff;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        .mobile-menu a.cta-nav {
+            background: linear-gradient(135deg, #c0392b, #e8433a);
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+        }
+        .mobile-menu a.cta-nav:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        /* ===== CAFE HERO ===== */
+        .cafe-hero {
+            text-align: center;
+            padding: 50px 24px 35px;
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            margin: 0;
+            width: 100%;
+            border-bottom: 4px solid #1a5a3a;
+            position: relative;
+            overflow: hidden;
+        }
+        .cafe-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+            border-radius: 50%;
+        }
+        .cafe-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+            border-radius: 50%;
+        }
+        .cafe-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
+        }
+        .cafe-brand-sub {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: -8px;
+            position: relative;
+            z-index: 1;
+        }
+        .cafe-divider {
+            width: 60px;
+            height: 3px;
+            background: #c7a252;
+            margin: 15px auto 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .cafe-hours {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding: 16px 28px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 0;
+        }
+        .cafe-hours .hour-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+        .cafe-hours .hour-item i {
+            color: #c7a252;
+            font-size: 1rem;
+        }
+        .cafe-phone {
+            margin-top: 16px;
+            font-size: 1.1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+        .cafe-phone i {
+            color: #c7a252;
+            margin-right: 8px;
+        }
+        .cafe-phone a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .cafe-phone a:hover {
+            color: #c7a252;
+        }
+
+        /* ===== CATEGORY TABS ===== */
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 24px;
+            margin: 0;
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid rgba(44,122,77,0.08);
+        }
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 10px 22px;
+            font-weight: 600;
+            color: #1a1a2e;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-size: 0.8rem;
+            border: 1px solid rgba(44,122,77,0.15);
+            font-family: 'Inter', sans-serif;
+            border-radius: 0;
+        }
+        .tab-btn i { margin-right: 6px; }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(44,122,77,0.2);
+        }
+        .tab-btn:hover:not(.active) {
+            background: rgba(44,122,77,0.05);
+            transform: translateY(-2px);
+        }
+
+        /* ===== MENU GRID - FULL WIDTH IMAGES WITH SPACING ===== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 0;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            background: #ffffff;
+        }
+        .menu-card {
+            background: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(44,122,77,0.06);
+            border-right: none;
+            border-bottom: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .menu-card:nth-child(even) {
+            background: #faf8f5;
+        }
+        .menu-card:hover {
+            background: #ffffff;
+            border-color: rgba(44,122,77,0.15);
+            box-shadow: 0 8px 25px rgba(44,122,77,0.06);
+            z-index: 1;
+        }
+
+        .menu-img-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            padding: 12px 12px 0 12px;
+            background: rgba(44,122,77,0.03);
+            min-height: 200px;
+            align-items: center;
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+            width: 100%;
+        }
+        .menu-img-container .img-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: rgba(44,122,77,0.03);
+            flex-shrink: 0;
+            border-radius: 0;
+            border: none;
+        }
+        .menu-img-container .img-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(44,122,77,0.08);
+        }
+        .menu-img-container .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-img-container .img-wrapper .no-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(44,122,77,0.05);
+            color: rgba(26,26,46,0.4);
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 10px;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .menu-img-container .img-wrapper .no-image i {
+            font-size: 2.5rem;
+            color: #2c7a4d;
+            opacity: 0.3;
+        }
+        .menu-img-container .img-label {
+            display: none;
+        }
+
+        .menu-info {
+            padding: 18px 20px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-price {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #2c7a4d;
+            background: rgba(44,122,77,0.08);
+            padding: 3px 14px;
+            white-space: nowrap;
+            border-radius: 0;
+        }
+        .menu-desc {
+            color: rgba(26,26,46,0.6);
+            margin-top: 8px;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .menu-tags {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .tag {
+            font-size: 0.55rem;
+            background: rgba(44,122,77,0.08);
+            color: #2c7a4d;
+            padding: 2px 10px;
+            font-weight: 600;
+            border-radius: 0;
+        }
+        .tag.gluten-free { background: rgba(44,122,77,0.12); color: #1a5a3a; }
+        .tag.vegetarian { background: rgba(44,122,77,0.12); color: #1a5a3a; }
+        .tag.vegan { background: rgba(44,122,77,0.12); color: #1a5a3a; }
+        .tag.mild { background: rgba(199,162,82,0.15); color: #8a6a22; }
+
+        /* ===== INFO NOTE ===== */
+        .info-note {
+            background: rgba(44,122,77,0.05);
+            padding: 16px 24px;
+            text-align: center;
+            margin: 0;
+            width: 100%;
+            font-size: 0.8rem;
+            color: rgba(26,26,46,0.5);
+            border-top: 1px solid rgba(44,122,77,0.06);
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .info-note i {
+            color: #2c7a4d;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(44,122,77,0.08);
+            margin: 0;
+            color: rgba(26,26,46,0.3);
+            font-size: 0.85rem;
+            background: #ffffff;
+        }
+        footer i { color: #2c7a4d; }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .footer-links a {
+            color: rgba(26,26,46,0.4);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: #2c7a4d; }
+
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablet */
+        @media (max-width: 850px) {
+            .cafe-brand { font-size: 3rem; }
+            .cafe-hours { flex-direction: column; gap: 8px; align-items: center; padding: 14px 20px; border-radius: 0; }
+            .menu-grid { grid-template-columns: 1fr 1fr; }
+            .tab-btn { padding: 6px 14px; font-size: 0.7rem; }
+            .navbar { padding: 10px 20px; }
+            .nav-links a:not(.cta-nav) {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .menu-img-container { padding: 10px 10px 0 10px; }
+            .menu-img-container .img-wrapper { height: 170px; }
+            .category-tabs { padding: 16px; }
+            .menu-card:nth-child(even) {
+                background: #faf8f5;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            .cafe-brand { font-size: 2.2rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .menu-img-container { padding: 8px 8px 0 8px; }
+            .menu-img-container .img-wrapper { height: 180px; }
+            .navbar { flex-direction: row; padding: 10px 16px; }
+            .logo { font-size: 1rem; }
+            .logo-img { height: 32px; }
+            .cafe-hero { padding: 30px 16px 20px; }
+            .category-tabs { padding: 12px; gap: 4px; }
+            .tab-btn { padding: 4px 10px; font-size: 0.65rem; }
+            .info-note { padding: 12px 16px; font-size: 0.7rem; }
+            .menu-card:nth-child(even) {
+                background: #faf8f5;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 400px) {
+            .cafe-brand { font-size: 1.8rem; }
+            .cafe-brand-sub { font-size: 0.9rem; letter-spacing: 2px; }
+            .cafe-hours .hour-item { font-size: 0.75rem; }
+            .cafe-phone { font-size: 0.9rem; }
+            .menu-img-container { padding: 6px 6px 0 6px; }
+            .menu-img-container .img-wrapper { height: 160px; }
+            .menu-title { font-size: 0.9rem; }
+            .menu-price { font-size: 0.75rem; padding: 2px 10px; }
+            .menu-desc { font-size: 0.75rem; }
+            .menu-info { padding: 12px 14px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR (matching index) ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="partners/elephante.png" alt="Elephante Commons" class="logo-img">
+            <span>ELEPHANTE <span class="highlight">COMMONS</span></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="menu.html" class="active">MENU</a>
+            <a href="space.html">SPACES</a>
+            <a href="partner.html">PARTNERS</a>
+            <a href="lodge.html">LODGE</a>
+            <a href="connect.html">CONNECT</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="menu.html" class="active">MENU</a>
+            <a href="space.html">SPACES</a>
+            <a href="partner.html">PARTNERS</a>
+            <a href="lodge.html">LODGE</a>
+            <a href="connect.html">CONNECT</a>
+        </div>
+    </nav>
+
+    <!-- ===== CAFE HERO ===== -->
+    <div class="cafe-hero fade-up">
+        <div class="cafe-brand">ELEPHANTE</div>
+        <div class="cafe-brand-sub">CAFE</div>
+        <div class="cafe-divider"></div>
+        <div class="cafe-hours">
+            <span class="hour-item"><i class="fas fa-clock"></i> <strong>Mon-Sat:</strong> 9:00 AM - 9:00 PM</span>
+            <span class="hour-item"><i class="fas fa-clock"></i> <strong>Sun:</strong> 11:00 AM - 9:00 PM</span>
+        </div>
+        <div class="cafe-phone">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:+256782389824">Call or WhatsApp your order: +256 782 389 824</a>
+        </div>
+    </div>
+
+    <!-- ===== CATEGORY TABS ===== -->
+    <div class="category-tabs fade-up">
+        <button class="tab-btn active" data-category="all"><i class="fas fa-th-large"></i> All</button>
+        <button class="tab-btn" data-category="breakfast"><i class="fas fa-sun"></i> Breakfast</button>
+        <button class="tab-btn" data-category="appetizers"><i class="fas fa-utensil-spoon"></i> Appetizers</button>
+        <button class="tab-btn" data-category="local"><i class="fas fa-utensils"></i> Local</button>
+        <button class="tab-btn" data-category="global"><i class="fas fa-globe"></i> Global</button>
+        <button class="tab-btn" data-category="pizza"><i class="fas fa-pizza-slice"></i> Pizza</button>
+        <button class="tab-btn" data-category="burgers"><i class="fas fa-hamburger"></i> Burgers</button>
+        <button class="tab-btn" data-category="salads"><i class="fas fa-salad"></i> Salads</button>
+        <button class="tab-btn" data-category="kids"><i class="fas fa-child"></i> Kids</button>
+        <button class="tab-btn" data-category="desserts"><i class="fas fa-cake"></i> Desserts</button>
+    </div>
+
+    <!-- ===== MENU GRID ===== -->
+    <div id="menu-grid" class="menu-grid"></div>
+
+    <!-- ===== INFO NOTE ===== -->
+    <div class="info-note fade-up">
+        <i class="fas fa-leaf"></i> All prices in UGX · 10% service charge for groups 6+ · Gluten-free options available
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>🐘 Elephante Commons — Where Innovation Meets Community</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="menu.html">Menu</a>
+            <a href="space.html">Spaces</a>
+            <a href="partner.html">Partners</a>
+            <a href="lodge.html">Lodge</a>
+        </div>
+        <p><i class="fas fa-heart"></i> Gulu, Northern Uganda &nbsp;·&nbsp; <i class="fas fa-phone-alt"></i> +256 0782 389 824</p>
+        <p style="font-size:0.75rem; opacity:0.4; margin-top:8px;">Built with love for the community that inspires us every day.</p>
+    </footer>
+
+    <script>
+        // ===== HAMBURGER MENU TOGGLE =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // ===== MENU DATA =====
+        const menuItems = [
+            // ===== BREAKFAST =====
+            { 
+                id: 1, 
+                name: "Patty's Breakfast Burrito", 
+                price: "Ugx20,000", 
+                category: "breakfast", 
+                desc: "Giant tortilla filled with hash-browns, bacon, eggs, melted cheese, guacamole with salsa.",
+                images: ["burritoo.webp"]
+            },
+            { 
+                id: 2, 
+                name: "All-American Breakfast", 
+                price: "Ugx 25,000", 
+                category: "breakfast", 
+                desc: "Choice of pancakes or waffles, bacon, hash-browns, two eggs, small fruit bowl.",
+                images: ["american.jpg"]
+            },
+            { 
+                id: 3, 
+                name: "Greek Scramble", 
+                price: "Ugx 19,000", 
+                category: "breakfast", 
+                desc: "Scrambled eggs with melted feta, fresh spinach, side of avocado.", 
+                tags: ["Gluten free", "Vegetarian"],
+                images: ["burritoo.webp"] 
+            },
+            { 
+                id: 4, 
+                name: "Avocado Toast", 
+                price: "Ugx 17,000", 
+                category: "breakfast", 
+                desc: "Toasted house bread with seasoned avocado and two fried eggs.", 
+                tags: ["Vegetarian"],
+                images: ["4.jpg"] 
+            },
+            { 
+                id: 5, 
+                name: "Breakfast Bagel", 
+                price: "Ugx 20,000", 
+                category: "breakfast", 
+                desc: "Toasted bagel with two fried eggs, bacon, cheese, side of avocado.",
+                images: ["5.jpg"] 
+            },
+            { 
+                id: 6, 
+                name: "Breakfast Quesadilla", 
+                price: "Ugx 25,000", 
+                category: "breakfast", 
+                desc: "Italian sausage patty, melted gouda, veggies in crunchy tortilla. Served with sour cream, salsa, guacamole.",
+                images: ["6.jpg"] 
+            },
+            { 
+                id: 7, 
+                name: "Breakfast Sandwich", 
+                price: "Ugx 25,000", 
+                category: "breakfast", 
+                desc: "Crisp sausages, cheesy scrambled eggs, tomatoes, spinach on toasted homemade bread.",
+                images: ["7.jpg"] 
+            },
+            { 
+                id: 8, 
+                name: "Breakfast Frittata", 
+                price: "Ugx 26,000", 
+                category: "breakfast", 
+                desc: "Mushrooms, spinach, ham, gouda cheese baked to golden perfection.",
+                images: ["8.jpg"] 
+            },
+            { 
+                id: 9, 
+                name: "Pancakes", 
+                price: "Ugx 10,000", 
+                category: "breakfast", 
+                desc: "Fluffy pancakes served with syrup.",
+                images: ["9.jpg"] 
+            },
+            { 
+                id: 10, 
+                name: "Waffles", 
+                price: "Ugx 9,000", 
+                category: "breakfast", 
+                desc: "Crispy waffles with your choice of toppings.",
+                images: ["10.jpg"] 
+            },
+            { 
+                id: 11, 
+                name: "Hashbrowns", 
+                price: "Ugx 5,000", 
+                category: "breakfast", 
+                desc: "Crispy golden hashbrowns.",
+                images: ["11.jpg"]
+            },
+            { 
+                id: 12, 
+                name: "Bagel", 
+                price: "Ugx 6,000", 
+                category: "breakfast", 
+                desc: "Freshly baked bagel with cream cheese.",
+                images: ["12.jpg"] 
+            },
+            { 
+                id: 13, 
+                name: "Sausages", 
+                price: "Ugx 6,000", 
+                category: "breakfast", 
+                desc: "Grilled breakfast sausages.",
+                images: ["13.jpg"] 
+            },
+            { 
+                id: 14, 
+                name: "Bacon", 
+                price: "Ugx 6,000", 
+                category: "breakfast", 
+                desc: "Crispy bacon strips.",
+                images: ["14.jpg"] 
+            },
+            { 
+                id: 15, 
+                name: "Eggs", 
+                price: "Ugx 3,000", 
+                category: "breakfast", 
+                desc: "Eggs cooked your way.",
+                images: ["15.jpg"]
+            },
+            { 
+                id: 16, 
+                name: "Breakfast Potatoes", 
+                price: "Ugx 5,000", 
+                category: "breakfast", 
+                desc: "Seasoned breakfast potatoes.",
+                images: ["16.jpg"] 
+            },
+            { 
+                id: 17, 
+                name: "Homestyle Potatoes", 
+                price: "Ugx 5,000", 
+                category: "breakfast", 
+                desc: "Homestyle seasoned potatoes.",
+                images: ["17.jpg"]
+            },
+            { 
+                id: 18, 
+                name: "Pancakes w/Bananas", 
+                price: "Ugx 11,000", 
+                category: "breakfast", 
+                desc: "Pancakes topped with fresh bananas.",
+                images: ["18.jpg"]
+            },
+            
+            // ===== APPETIZERS =====
+            { 
+                id: 19, 
+                name: "Chapatti Chips & Dip (Small)", 
+                price: "Ugx 3,000", 
+                category: "appetizers", 
+                desc: "Crispy housemade chapatti chips with guacamole and salsa.", 
+                tags: ["Vegetarian", "Vegan"],
+                images: ["19.jpg"] 
+            },
+            { 
+                id: 20, 
+                name: "Chapatti Chips & Dip (Large)", 
+                price: "Ugx 7,000", 
+                category: "appetizers", 
+                desc: "Large crispy housemade chapatti chips with guacamole and salsa.", 
+                tags: ["Vegetarian", "Vegan"],
+                images: ["20.jpg"] 
+            },
+            { 
+                id: 21, 
+                name: "Soft Pretzel", 
+                price: "Ugx 7,000", 
+                category: "appetizers", 
+                desc: "Giant salted soft pretzel with cheese sauce or marinara.", 
+                tags: ["Vegetarian"],
+                images: ["21.jpg"] 
+            },
+            { 
+                id: 22, 
+                name: "Kale Chips", 
+                price: "Ugx 6,000", 
+                category: "appetizers", 
+                desc: "Crispy seasoned spinach greens baked to perfection.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["22.jpg"] 
+            },
+            { 
+                id: 23, 
+                name: "Veggie Plate", 
+                price: "Ugx 6,000", 
+                category: "appetizers", 
+                desc: "Fresh cucumber, carrots, green pepper, tomato with ranch and guacamole.", 
+                tags: ["Gluten free", "Vegetarian"],
+                images: ["23.jpg"]
+            },
+            { 
+                id: 24, 
+                name: "Fruit Bowl (Small)", 
+                price: "Ugx 6,000", 
+                category: "appetizers", 
+                desc: "Fresh pineapple, banana, apple slices with passionfruit.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["24.jpg"]
+            },
+            { 
+                id: 25, 
+                name: "Fruit Bowl (Large)", 
+                price: "Ugx 11,000", 
+                category: "appetizers", 
+                desc: "Large fresh pineapple, banana, apple slices with passionfruit.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["25.jpg"] 
+            },
+            { 
+                id: 26, 
+                name: "Cheese Fries", 
+                price: "Ugx 14,000", 
+                category: "appetizers", 
+                desc: "Crispy fries with bacon bits, chives and melted cheese.", 
+                tags: ["Gluten free"],
+                images: ["26.jpg"]
+            },
+            { 
+                id: 27, 
+                name: "Thai Spring Roll", 
+                price: "Ugx 15,000", 
+                category: "appetizers", 
+                desc: "Crunchy spring rolls with veggies and Thai dipping sauce.", 
+                tags: ["Vegetarian", "Vegan"],
+                images: ["27.jpg"] 
+            },
+            { 
+                id: 28, 
+                name: "Bruschetta", 
+                price: "Ugx 14,000", 
+                category: "appetizers", 
+                desc: "Crisp garlic bread with tomatoes, basil, mozzarella, olive oil.", 
+                tags: ["Vegetarian"],
+                images: ["28.jpg"]
+            },
+            
+            // ===== LOCAL CUISINE =====
+            { 
+                id: 29, 
+                name: "Cow Pea Stew", 
+                price: "Ugx 10,000", 
+                category: "local", 
+                desc: "Best cow pea stew in Gulu with secret ingredients.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["29.jpg"] 
+            },
+            { 
+                id: 30, 
+                name: "King Samosa (Cow Pea)", 
+                price: "Ugx 6,000", 
+                category: "local", 
+                desc: "Giant samosa filled with cow pea.", 
+                tags: ["Vegetarian"],
+                images: ["30.jpg"] 
+            },
+            { 
+                id: 31, 
+                name: "King Samosa (Meat)", 
+                price: "Ugx 7,000", 
+                category: "local", 
+                desc: "Giant samosa filled with meat.",
+                images: ["31.jpg"] 
+            },
+            { 
+                id: 32, 
+                name: "Fried Chicken", 
+                price: "Ugx 25,000", 
+                category: "local", 
+                desc: "Breaded deep-fried chicken with rice, chapatti or chips.", 
+                tags: ["Gluten free"],
+                images: ["32.jpg"] 
+            },
+            { 
+                id: 33, 
+                name: "Pan-fried Pork", 
+                price: "Ugx 28,000", 
+                category: "local", 
+                desc: "High quality pork in secret sauce with rice, chapatti or chips.", 
+                tags: ["Gluten free"],
+                images: ["33.jpg"] 
+            },
+            { 
+                id: 34, 
+                name: "Executive Beans", 
+                price: "Ugx 9,000", 
+                category: "local", 
+                desc: "Special beans with secret ingredients and spices.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["34.jpg"] 
+            },
+            { 
+                id: 35, 
+                name: "Malakwang", 
+                price: "Ugx 8,000", 
+                category: "local", 
+                desc: "Traditional dish with precooked malakwang and odii.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["35.jpg"] 
+            },
+            { 
+                id: 36, 
+                name: "Chicken Stew", 
+                price: "Ugx 20,000", 
+                category: "local", 
+                desc: "Tender chicken in broth with veggies and spice blend.",
+                images: ["36.jpg"] 
+            },
+            { 
+                id: 37, 
+                name: "Boo and Eggs", 
+                price: "Ugx 10,000", 
+                category: "local", 
+                desc: "Unique combination of boo and eggs with special spices.", 
+                tags: ["Gluten free", "Vegetarian"],
+                images: ["37.jpg"] 
+            },
+            { 
+                id: 38, 
+                name: "Smoked Beef", 
+                price: "Ugx 18,000", 
+                category: "local", 
+                desc: "Tender beef simmered in rich smoky sauce.", 
+                tags: ["Gluten free"],
+                images: ["38.jpg"]
+            },
+            { 
+                id: 39, 
+                name: "Dek Ngoo", 
+                price: "Ugx 10,000", 
+                category: "local", 
+                desc: "Mashed lentils (Lapena) with shea butter oil.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["Dek Ngoo.jpg"] 
+            },
+            { 
+                id: 40, 
+                name: "Goat Muchomo", 
+                price: "Ugx 25,000", 
+                category: "local", 
+                desc: "Tender goat meat with BBQ sauce marinade and coleslaw.", 
+                tags: ["Gluten free"],
+                images: ["Goat Muchomo.jpg"] 
+            },
+            { 
+                id: 41, 
+                name: "Pan Fried Chicken", 
+                price: "Ugx 30,000", 
+                category: "local", 
+                desc: "Golden nuggets of chicken in rich gravy.", 
+                tags: ["Gluten free"],
+                images: ["Pan Fried Chicken.jpg"] 
+            },
+            
+            // ===== GLOBAL CUISINE =====
+            { 
+                id: 42, 
+                name: "Macaroni and Cheese", 
+                price: "Ugx 22,000", 
+                category: "global", 
+                desc: "Penne noodles in creamy cheese sauce.", 
+                tags: ["Vegetarian"],
+                images: ["Macaroni and Cheese.jpg"]
+            },
+            { 
+                id: 43, 
+                name: "Teriyaki Bowl", 
+                price: "Ugx 21,000", 
+                category: "global", 
+                desc: "Chicken in teriyaki sauce over rice and roasted veggies.", 
+                tags: ["Gluten free"],
+                images: ["Teriyaki Bowl.jpg"]
+            },
+            { 
+                id: 44, 
+                name: "Creamy Masala", 
+                price: "Ugx 27,000", 
+                category: "global", 
+                desc: "Famous creamy masala with mushrooms or chicken. Side of rice, chapatti or chips.", 
+                tags: ["Gluten free"],
+                images: ["Creamy Masala.jpg"] 
+            },
+            { 
+                id: 45, 
+                name: "Sweet & Sour Chicken", 
+                price: "Ugx 29,000", 
+                category: "global", 
+                desc: "Crispy chicken in sweet & sour Chinese sauce with rice.",
+                images: ["Sweet & Sour Chicken.jpg"] 
+            },
+            { 
+                id: 46, 
+                name: "Cheese Steak Sandwich", 
+                price: "Ugx 22,000", 
+                category: "global", 
+                desc: "Tender steak with onions, peppers, gouda on homemade bread.",
+                images: ["Cheese Steak Sandwich.jpg"]
+            },
+            { 
+                id: 47, 
+                name: "Lettuce Steak Wrap", 
+                price: "Ugx 26,000", 
+                category: "global", 
+                desc: "Grilled steak strips and veggies in lettuce cups with Thai sauce.", 
+                tags: ["Gluten free"],
+                images: ["Lettuce Steak Wrap.jpg"] 
+            },
+            { 
+                id: 48, 
+                name: "Teriyaki Chicken Ramen", 
+                price: "Ugx 32,000", 
+                category: "global", 
+                desc: "Vibrant bowl with mushrooms, spinach, egg, spring onions, teriyaki chicken.",
+                images: ["Teriyaki Chicken Ramen.jpg"] 
+            },
+            { 
+                id: 49, 
+                name: "Roasted Veggie Wrap", 
+                price: "Ugx 24,000", 
+                category: "global", 
+                desc: "Zucchini, butternut, carrots, mushrooms with feta cheese.", 
+                tags: ["Vegetarian"],
+                images: ["Roasted Veggie Wrap.jpg"] 
+            },
+            
+            // ===== PIZZA =====
+            { 
+                id: 50, 
+                name: "Margherita (Small)", 
+                price: "Ugx 15,000", 
+                category: "pizza", 
+                desc: "Cheese and tomato sauce.", 
+                tags: ["Vegetarian"],
+                images: ["Margherita.jpg"] 
+            },
+            { 
+                id: 51, 
+                name: "Margherita (Medium)", 
+                price: "Ugx 20,000", 
+                category: "pizza", 
+                desc: "Cheese and tomato sauce.", 
+                tags: ["Vegetarian"],
+                images: ["Margherita.jpg"] 
+            },
+            { 
+                id: 52, 
+                name: "Margherita (Large)", 
+                price: "Ugx 29,000", 
+                category: "pizza", 
+                desc: "Cheese and tomato sauce.", 
+                tags: ["Vegetarian"],
+                images: ["Margherita.jpg"] 
+            },
+            { 
+                id: 53, 
+                name: "BBQ Chicken (Small)", 
+                price: "Ugx 20,000", 
+                category: "pizza", 
+                desc: "BBQ sauce and shredded chicken.",
+                images: ["BBQ Chicken (Small).jpg"] 
+            },
+            { 
+                id: 54, 
+                name: "BBQ Chicken (Medium)", 
+                price: "Ugx 29,000", 
+                category: "pizza", 
+                desc: "BBQ sauce and shredded chicken.",
+                images: ["BBQ Chicken (Medium).jpg"] 
+            },
+            { 
+                id: 55, 
+                name: "BBQ Chicken (Large)", 
+                price: "Ugx 40,000", 
+                category: "pizza", 
+                desc: "BBQ sauce and shredded chicken.",
+                images: ["BBQ Chicken (Large).jpg"] 
+            },
+            { 
+                id: 56, 
+                name: "Pork in an Orchard (Small)", 
+                price: "Ugx 19,000", 
+                category: "pizza", 
+                desc: "Bacon, apple slices, caramelized onions.",
+                images: ["Pig in an Orchard (Small).jpg"] 
+            },
+            { 
+                id: 57, 
+                name: "Pork in an Orchard (Medium)", 
+                price: "Ugx 28,000", 
+                category: "pizza", 
+                desc: "Bacon, apple slices, caramelized onions.",
+                images: ["Pig in an Orchard (Small).jpg"] 
+            },
+            { 
+                id: 58, 
+                name: "Pig in an Orchard (Large)", 
+                price: "Ugx 39,000", 
+                category: "pizza", 
+                desc: "Bacon, apple slices, caramelized onions.",
+                images: ["Pig in an Orchard (Small).jpg"] 
+            },
+            //{ 
+            //    id: 59, 
+            //    name: "Veggie Deluxe (Small)", 
+            //    price: "18,000", 
+             //   category: "pizza", 
+            //    desc: "Green peppers, spinach, onions, olives, tomatoes, mushrooms.", 
+            //    tags: ["Vegetarian"],
+            //    images: ["Veggie Deluxe (Small).JPG"] 
+            //},
+            { 
+                id: 60, 
+                name: "Veggie Deluxe (Medium)", 
+                price: "Ugx 28,000", 
+                category: "pizza", 
+                desc: "Green peppers, spinach, onions, olives, tomatoes, mushrooms.", 
+                tags: ["Vegetarian"],
+                images: ["Veggie Deluxe (Medium).jpg"]  
+            },
+            { 
+                id: 61, 
+                name: "Veggie Deluxe (Large)", 
+                price: "Ugx 37,000", 
+                category: "pizza", 
+                desc: "Green peppers, spinach, onions, olives, tomatoes, mushrooms.", 
+                tags: ["Vegetarian"],
+                images: ["Veggie Deluxe (Medium).jpg"] 
+            },
+            { 
+                id: 62, 
+                name: "Buffalo Chicken (Small)", 
+                price: "Ugx 21,000", 
+                category: "pizza", 
+                desc: "Spicy buffalo sauce, chicken, onions, cilantro, mozzarella.", 
+                tags: ["Mild"],
+                images: ["Buffalo Chicken (Small).jpg"] 
+            },
+            { 
+                id: 63, 
+                name: "Buffalo Chicken (Medium)", 
+                price: "3Ugx 1,000", 
+                category: "pizza", 
+                desc: "Spicy buffalo sauce, chicken, onions, cilantro, mozzarella.", 
+                tags: ["Mild"],
+                images: ["Buffalo Chicken (large).jpg"] 
+            },
+            { 
+                id: 64, 
+                name: "Buffalo Chicken (Large)", 
+                price: "Ugx 41,000", 
+                category: "pizza", 
+                desc: "Spicy buffalo sauce, chicken, onions, cilantro, mozzarella.", 
+                tags: ["Mild"],
+                images: ["Buffalo Chicken (large).jpg"] 
+            },
+            { 
+                id: 65, 
+                name: "Chicken Tikka (Small)", 
+                price: "Ugx 23,000", 
+                category: "pizza", 
+                desc: "Chicken in tikka masala marinade with onions and green chilis.", 
+                tags: ["Mild"],
+                images: ["Chicken Tikka (Small).jpg"] 
+            },
+            { 
+                id: 66, 
+                name: "Chicken Tikka (Medium)", 
+                price: "Ugx 32,000", 
+                category: "pizza", 
+                desc: "Chicken in tikka masala marinade with onions and green chilis.", 
+                tags: ["Mild"],
+                images: ["Chicken Tikka (Medium).jpg"] 
+            },
+            { 
+                id: 67, 
+                name: "Chicken Tikka (Large)", 
+                price: "Ugx 42,000", 
+                category: "pizza", 
+                desc: "Chicken in tikka masala marinade with onions and green chilis.", 
+                tags: ["Mild"],
+                images: ["Chicken Tikka (Medium).jpg"] 
+            },
+            
+            // ===== BURGERS =====
+            { 
+                id: 68, 
+                name: "Classic Hamburger", 
+                price: "Ugx 22,000", 
+                category: "burgers", 
+                desc: "Beef patty with big mac sauce, lettuce, fresh veggies. Sides included.",
+                images: ["Classic Hamburger.jpg"] 
+            },
+            { 
+                id: 69, 
+                name: "Cheeseburger", 
+                price: "Ugx 24,000", 
+                category: "burgers", 
+                desc: "Beef patty with cheese, big mac sauce, lettuce, fresh veggies. Sides included.",
+                images: ["Cheeseburger.jpg"]
+            },
+            { 
+                id: 70, 
+                name: "Teriyaki Burger", 
+                price: "Ugx 26,000", 
+                category: "burgers", 
+                desc: "Patty with melted cheese, grilled teriyaki pineapple, onions, lettuce, tomato. Sides included.",
+                images: ["Teriyaki Burger.jpg"] 
+            },
+            { 
+                id: 71, 
+                name: "Breakfast Burger", 
+                price: "Ugx 27,000", 
+                category: "burgers", 
+                desc: "Crispy fried egg on cheese-covered patty with bacon. Sides included.",
+                images: ["Breakfast Burger.jpg"] 
+            },
+            { 
+                id: 72, 
+                name: "Crispy Chicken Burger", 
+                price: "Ugx 26,000", 
+                category: "burgers", 
+                desc: "Crispy chicken breast with lettuce, onions, tomatoes, green pepper. Sides included.",
+                images: ["Crispy Chicken Burger.jpg"] 
+            },
+            { 
+                id: 73, 
+                name: "Buffalo Chicken Burger", 
+                price: "Ugx 27,000", 
+                category: "burgers", 
+                desc: "Crispy chicken in buffalo marinade with tomatoes, onions, lettuce, tzatziki. Sides included.", 
+                tags: ["Mild"],
+                images: ["Buffalo Chicken Burger.jpg"] 
+            },
+            { 
+                id: 74, 
+                name: "Crispy Fish Burger", 
+                price: "Ugx 26,000", 
+                category: "burgers", 
+                desc: "Crispy deep-fried fish fillet with lettuce, onions, tomatoes, peppers. Sides included.",
+                images: ["Crispy Fish Burger.jpg"] 
+            },
+            { 
+                id: 75, 
+                name: "Crispy Eggplant Burger", 
+                price: "Ugx 24,500", 
+                category: "burgers", 
+                desc: "Seasoned crispy eggplant, spinach, onions, tomato, ranch dressing. Sides included.", 
+                tags: ["Vegetarian"],
+                images: ["Crispy Eggplant Burger.jpg"] 
+            },
+           // { 
+           //     id: 76, 
+           //     name: "Korean BBQ Burger", 
+           //     price: "Ugx 29,000", 
+           //     category: "burgers", 
+           //     desc: "Beef patty with Korean BBQ marinade, kimchi mayo, green onions, lettuce, purple cabbage. Sides included.",
+           //     images: ["Korean BBQ Burger.JPG"] 
+           // },
+            
+            // ===== SALADS =====
+            { 
+                id: 77, 
+                name: "House Salad (Small)", 
+                price: "Ugx 10,000", 
+                category: "salads", 
+                desc: "Cucumbers, carrots, tomatoes, onions, green pepper, croutons on greens. Choice of dressing.", 
+                tags: ["Gluten free", "Vegetarian"],
+                images: ["House Salad (Small).jpg"] 
+            },
+            { 
+                id: 78, 
+                name: "House Salad (Large)", 
+                price: "Ugx 17,000", 
+                category: "salads", 
+                desc: "Large cucumbers, carrots, tomatoes, onions, green pepper, croutons on greens. Choice of dressing.", 
+                tags: ["Gluten free", "Vegetarian"],
+                images: ["House Salad (Large).jpg"] 
+            },
+            { 
+                id: 79, 
+                name: "Pasta Salad (Small)", 
+                price: "Ugx 15,000", 
+                category: "salads", 
+                desc: "Pasta, tomato, cucumber, black olives, spinach, feta with Italian dressing.", 
+                tags: ["Vegetarian"],
+                images: ["Pasta Salad (Small).jpg"] 
+            },
+            { 
+                id: 80, 
+                name: "Pasta Salad (Large)", 
+                price: "Ugx 23,000", 
+                category: "salads", 
+                desc: "Large pasta, tomato, cucumber, black olives, spinach, feta with Italian dressing.", 
+                tags: ["Vegetarian"],
+                images: ["Pasta Salad (Large).jpg"] 
+            },
+            { 
+                id: 81, 
+                name: "Greek Salad (Small)", 
+                price: "Ugx 15,000", 
+                category: "salads", 
+                desc: "Black olives, feta cheese, tomatoes, cucumber. Mediterranean classic.", 
+                tags: ["Vegetarian"],
+                images: ["Greek Salad (Small).jpg"] 
+            },
+            { 
+                id: 82, 
+                name: "Greek Salad (Large)", 
+                price: "Ugx 23,000", 
+                category: "salads", 
+                desc: "Large black olives, feta cheese, tomatoes, cucumber. Mediterranean classic.", 
+                tags: ["Vegetarian"],
+                images: ["Greek Salad (Large).jpg"] 
+            },
+            { 
+                id: 83, 
+                name: "Crispy Chicken Salad (Small)", 
+                price: "Ugx 17,000", 
+                category: "salads", 
+                desc: "Signature crispy chicken breast with fresh veggies and parmesan.",
+                images: ["Crispy Chicken Salad (Small).jpg"] 
+            },
+            { 
+                id: 84, 
+                name: "Crispy Chicken Salad (Large)", 
+                price: "Ugx 26,000", 
+                category: "salads", 
+                desc: "Large signature crispy chicken breast with fresh veggies and parmesan.",
+                images: ["Crispy Chicken Salad (Small).jpg"] 
+            },
+            { 
+                id: 85, 
+                name: "Asian Chicken Salad (Small)", 
+                price: "Ugx 16,000", 
+                category: "salads", 
+                desc: "Colorful veggies with teriyaki chicken breast and peanut dressing.",
+                images: ["Asian Chicken Salad (Small).jpg"] 
+            },
+            { 
+                id: 86, 
+                name: "Asian Chicken Salad (Large)", 
+                price: "Ugx 26,000", 
+                category: "salads", 
+                desc: "Large colorful veggies with teriyaki chicken breast and peanut dressing.",
+                images: ["Asian Chicken Salad (Large).jpg"] 
+            },
+            { 
+                id: 87, 
+                name: "Tropical Greek Salad (Small)", 
+                price: "Ugx 16,000", 
+                category: "salads", 
+                desc: "Tangerines, tomatoes, mangoes, cucumbers, pineapple, black olives, spinach, avocado. Balsamic vinaigrette.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["Tropical Greek Salad (Small).jpg"] 
+            },
+            { 
+                id: 88, 
+                name: "Tropical Greek Salad (Large)", 
+                price: "Ugx 24,000", 
+                category: "salads", 
+                desc: "Large tangerines, tomatoes, mangoes, cucumbers, pineapple, black olives, spinach, avocado. Balsamic vinaigrette.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["Tropical Greek Salad (Large).jpg"]
+            },
+            { 
+                id: 89, 
+                name: "Thai Steak Salad (Small)", 
+                price: "Ugx 18,000", 
+                category: "salads", 
+                desc: "Fresh crisp lettuce, tomatoes, cucumber, avocado, onions, mango, succulent steak strips with Thai marinade.", 
+                tags: ["Gluten free"],
+                images: ["Thai Steak Salad (Small).jpg"] 
+            },
+            { 
+                id: 90, 
+                name: "Thai Steak Salad (Large)", 
+                price: "Ugx 30,000", 
+                category: "salads", 
+                desc: "Large fresh crisp lettuce, tomatoes, cucumber, avocado, onions, mango, succulent steak strips with Thai marinade.", 
+                tags: ["Gluten free"],
+                images: ["Thai Steak Salad (Small).jpg"] 
+            },
+            
+            // ===== KIDS =====
+            { 
+                id: 91, 
+                name: "Hot Dog", 
+                price: "Ugx 11,000", 
+                category: "kids", 
+                desc: "Housemade bun with mustard, ketchup, relish. Side of fruit, veggies or chips.",
+                images: ["Hot Dog.jpg"] 
+            },
+            { 
+                id: 92, 
+                name: "Chicken Nuggets", 
+                price: "Ugx 15,000", 
+                category: "kids", 
+                desc: "6 breaded boneless chicken pieces with dipping sauce. Side of fruit, veggies or chips.",
+                images: ["Chicken Nuggets.jpg"] 
+            },
+            { 
+                id: 93, 
+                name: "Grilled Cheese Sandwich", 
+                price: "Ugx 10,000", 
+                category: "kids", 
+                desc: "Melted cheese on homemade toast. Side of fruit, veggies or chips.", 
+                tags: ["Vegetarian"],
+                images: ["Grilled Cheese Sandwich.jpg"] 
+            },
+            { 
+                id: 94, 
+                name: "Waffle Dippers", 
+                price: "Ugx 9,000", 
+                category: "kids", 
+                desc: "4 waffle sticks perfect for syrup dipping. Side of fruit, veggies or chips.", 
+                tags: ["Vegetarian"],
+                images: ["Waffle Dippers.jpg"] 
+            },
+            { 
+                id: 95, 
+                name: "Mini Quesadilla", 
+                price: "Ugx 10,000", 
+                category: "kids", 
+                desc: "Tortilla with refried beans, melted cheese, cilantro. Served with salsa, guacamole or sour cream.", 
+                tags: ["Vegetarian"],
+                images: ["Mini Quesadilla.jpg"] 
+            },
+            { 
+                id: 96, 
+                name: "Kid's Juice", 
+                price: "Ugx 2,500", 
+                category: "kids", 
+                desc: "Choice of passion juice, lemonade, or passionade in kids cup.", 
+                tags: ["Gluten free", "Vegetarian", "Vegan"],
+                images: ["Kid's Juice.jpg"] 
+            },
+            
+            // ===== DESSERTS =====
+            { 
+                id: 97, 
+                name: "Dessert Pizza", 
+                price: "Ugx 13,000", 
+                category: "desserts", 
+                desc: "Small pizza with melted butter, cinnamon and sugar crumble topping.", 
+                tags: ["Vegetarian"],
+                images: ["Dessert Pizza.jpg"] 
+            },
+            { 
+                id: 98, 
+                name: "Fudge Brownie", 
+                price: "Ugx 8,000", 
+                category: "desserts", 
+                desc: "Chocolate brownie with soft chewy center and crispy top.", 
+                tags: ["Vegetarian"],
+                images: ["Fudge Brownie.jpg"]
+            },
+            { 
+                id: 99, 
+                name: "Banana Bread", 
+                price: "Ugx 3,000", 
+                category: "desserts", 
+                desc: "Fresh baked banana bread.",
+                images: ["Banana Bread.jpg"] 
+            },
+            { 
+                id: 100, 
+                name: "Coffee Cake", 
+                price: "Ugx 5,000", 
+                category: "desserts", 
+                desc: "Delicious coffee cake.",
+                images: ["Coffee Cake.jpg"]
+            }
+        ];
+
+        // ===== RENDER MENU =====
+        const menuGrid = document.getElementById('menu-grid');
+        let currentCategory = 'all';
+
+        function getImagePath(filename) {
+            if (!filename) return '';
+            if (filename.includes('/') || filename.includes('\\')) {
+                return filename.replace(/\\/g, '/');
+            }
+            return 'Menu/' + filename;
+        }
+
+        function renderMenu(category) {
+            if (!menuGrid) return;
+            const filtered = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
+            menuGrid.innerHTML = '';
+            if (filtered.length === 0) {
+                menuGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:rgba(26,26,46,0.4); font-size:0.9rem; border:1px solid rgba(44,122,77,0.06);">✨ More delicious items coming soon! ✨</div>`;
+                return;
+            }
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+                
+                let tagsHTML = '';
+                if (item.tags) {
+                    tagsHTML = `<div class="menu-tags">`;
+                    item.tags.forEach(tag => {
+                        const tagClass = tag.toLowerCase().replace(' ', '-');
+                        tagsHTML += `<span class="tag ${tagClass}">${tag}</span>`;
+                    });
+                    tagsHTML += `</div>`;
+                }
+                
+                let imagesHTML = '';
+                const images = item.images || [];
+                
+                if (images.length > 0) {
+                    images.forEach((img) => {
+                        if (img && img !== '' && img !== 'null' && img !== 'undefined') {
+                            const imgPath = getImagePath(img);
+                            imagesHTML += `
+                                <div class="img-wrapper">
+                                    <img src="${imgPath}" alt="${item.name}" 
+                                         onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><i class=\\'fas fa-image\\'></i> No Image<br>Available</div>'">
+                                </div>
+                            `;
+                        }
+                    });
+                }
+                
+                if (!imagesHTML) {
+                    imagesHTML = `
+                        <div class="img-wrapper">
+                            <div class="no-image">
+                                <i class="fas fa-image"></i>
+                                No Image<br>Available
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                card.innerHTML = `
+                    <div class="menu-img-container">
+                        ${imagesHTML}
+                    </div>
+                    <div class="menu-info">
+                        <div class="menu-title">
+                            <span>${item.name}</span>
+                            <span class="menu-price">${item.price}</span>
+                        </div>
+                        <div class="menu-desc">${item.desc}</div>
+                        ${tagsHTML}
+                    </div>
+                `;
+                menuGrid.appendChild(card);
+            });
+        }
+
+        // ===== TAB BUTTONS =====
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const cat = btn.dataset.category;
+                if (!cat) return;
+                currentCategory = cat;
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMenu(currentCategory);
+            });
+        });
+
+        renderMenu('all');
+
+        // ===== FADE-UP OBSERVER =====
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+        fadeElements.forEach(el => observer.observe(el));
+
+        console.log('🐘 Elephante Commons — Menu Page');
+    </script>
+</body>
+</html>

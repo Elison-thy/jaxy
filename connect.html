@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elephante Commons | Connect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f4ff;
+            color: #1a1a2e;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f0ecf8; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #2c7a4d, #c7a252); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NAVBAR — FIXED TO TOP (matching index) ===== */
+        .navbar {
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(16px);
+            margin: 0;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #e8ddd0;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+        .logo .highlight {
+            color: #c0392b;
+        }
+
+        /* ===== NAV LINKS ===== */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(232, 221, 208, 0.7);
+            padding: 8px 18px;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            position: relative;
+            border-radius: 0;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+        .nav-links a.active {
+            color: #ffffff;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        .nav-links a.cta-nav {
+            background: linear-gradient(135deg, #c0392b, #e8433a);
+            color: white;
+            padding: 8px 24px;
+        }
+        .nav-links a.cta-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 5px;
+            background: transparent;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #e8ddd0;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(26, 35, 50, 0.98);
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            gap: 6px;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(232, 221, 208, 0.7);
+            padding: 10px 18px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-align: center;
+            border-radius: 0;
+        }
+        .mobile-menu a:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.05);
+        }
+        .mobile-menu a.active {
+            color: #ffffff;
+            background: rgba(192, 57, 43, 0.15);
+        }
+        .mobile-menu a.cta-nav {
+            background: linear-gradient(135deg, #c0392b, #e8433a);
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+        }
+        .mobile-menu a.cta-nav:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(192, 57, 43, 0.3);
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            margin: 0;
+            width: 100%;
+            border-bottom: 4px solid #1a5a3a;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+            border-radius: 50%;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            margin-top: 16px;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero .deco-line {
+            width: 80px;
+            height: 4px;
+            background: #c7a252;
+            margin: 20px auto 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        .section-title .highlight {
+            color: #2c7a4d;
+        }
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #2c7a4d, #c7a252);
+            margin: 10px auto 20px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: rgba(26,26,46,0.5);
+            max-width: 650px;
+            margin: 0 auto 20px;
+            font-size: 1.05rem;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5px;
+        }
+
+        /* ===== PARTNER SECTION ===== */
+        .partner-section {
+            padding: 60px 40px;
+            background: #f8f4ff;
+            margin: 0;
+            width: 100%;
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .partner-section:nth-child(even) {
+            background: #ffffff;
+        }
+        .partner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .partner-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #1a1a2e;
+        }
+        .partner-content h2 .highlight {
+            color: #2c7a4d;
+        }
+        .partner-content p {
+            color: rgba(26,26,46,0.7);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        .partner-card {
+            background: white;
+            padding: 32px 28px;
+            text-align: center;
+            border: 1px solid rgba(44,122,77,0.06);
+            transition: all 0.4s ease;
+            border-radius: 0;
+        }
+        .partner-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(44,122,77,0.06);
+            border-color: rgba(44,122,77,0.15);
+        }
+        .partner-card .icon {
+            font-size: 2.8rem;
+            color: #2c7a4d;
+            margin-bottom: 12px;
+        }
+        .partner-card h3 {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        .partner-card p {
+            color: rgba(26,26,46,0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== VOLUNTEER & DONATE ===== */
+        .volunteer-donate {
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .vd-card {
+            background: white;
+            padding: 36px 30px;
+            border: 1px solid rgba(44,122,77,0.06);
+            transition: all 0.4s ease;
+            text-align: center;
+            border-radius: 0;
+        }
+        .vd-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(44,122,77,0.06);
+            border-color: rgba(44,122,77,0.15);
+        }
+        .vd-card .icon {
+            font-size: 3rem;
+            color: #c7a252;
+            margin-bottom: 12px;
+        }
+        .vd-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #1a1a2e;
+        }
+        .vd-card p {
+            color: rgba(26,26,46,0.6);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 12px 0 18px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-block;
+            padding: 14px 36px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 25px rgba(44,122,77,0.2);
+            border-radius: 0;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(44,122,77,0.3);
+        }
+        .btn-secondary {
+            display: inline-block;
+            padding: 14px 36px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: #c7a252;
+            color: white;
+            border: none;
+            box-shadow: 0 8px 25px rgba(199,162,82,0.2);
+            border-radius: 0;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(199,162,82,0.3);
+        }
+        .btn-outline-pink {
+            display: inline-block;
+            padding: 12px 32px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: #2c7a4d;
+            border: 2px solid #2c7a4d;
+            border-radius: 0;
+        }
+        .btn-outline-pink:hover {
+            background: #2c7a4d;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== HOW TO FIND US ===== */
+        .find-us-section {
+            padding: 60px 40px;
+            background: #ffffff;
+            width: 100%;
+            margin: 0;
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .find-us {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .find-us-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: #1a1a2e;
+        }
+        .find-us-info h2 .highlight {
+            color: #2c7a4d;
+        }
+        .find-us-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .find-us-item .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(44,122,77,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c7a4d;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            border-radius: 0;
+        }
+        .find-us-item .icon.blue {
+            background: rgba(199,162,82,0.08);
+            color: #c7a252;
+        }
+        .find-us-item h4 {
+            color: #1a1a2e;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+        .find-us-item p {
+            color: rgba(26,26,46,0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== MAP ===== */
+        .map-section {
+            margin: 0;
+            border-top: 1px solid rgba(44,122,77,0.06);
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .map-section iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            display: block;
+        }
+
+        /* ===== SOCIAL LINKS ===== */
+        .social-section {
+            padding: 60px 40px;
+            background: #f8f4ff;
+            width: 100%;
+            margin: 0;
+            border-bottom: 1px solid rgba(44,122,77,0.06);
+        }
+        .social-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            border-radius: 0;
+        }
+        .social-link:hover {
+            transform: translateY(-4px);
+        }
+        .social-link.instagram {
+            background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+            color: white;
+        }
+        .social-link.facebook {
+            background: #1877f2;
+            color: white;
+        }
+        .social-link.youtube {
+            background: #ff0000;
+            color: white;
+        }
+        .social-link.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        .social-link i {
+            font-size: 1.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(44,122,77,0.08);
+            margin: 0;
+            color: rgba(26,26,46,0.3);
+            font-size: 0.85rem;
+            background: #ffffff;
+        }
+        footer i { color: #2c7a4d; }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .footer-links a {
+            color: rgba(26,26,46,0.4);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: #2c7a4d; }
+
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablet */
+        @media (max-width: 850px) {
+            .hero h1 { font-size: 3rem; }
+            .hero { padding: 60px 20px; }
+            .partner-grid { grid-template-columns: 1fr; }
+            .volunteer-donate { grid-template-columns: 1fr; padding: 40px 20px; }
+            .find-us { grid-template-columns: 1fr; }
+            .find-us-section { padding: 40px 20px; }
+            .social-section { padding: 40px 20px; }
+            .partner-section { padding: 40px 20px; }
+            .section-title { font-size: 2rem; }
+            .nav-links a:not(.cta-nav) {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .map-section iframe { height: 300px; }
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .hero { padding: 40px 16px; }
+            .partner-content h2 { font-size: 2rem; }
+            .partner-content p { font-size: 0.95rem; }
+            .vd-card h2 { font-size: 1.6rem; }
+            .vd-card { padding: 24px 16px; }
+            .partner-card { padding: 20px 16px; }
+            .social-grid { flex-direction: column; align-items: center; }
+            .social-link { width: 100%; justify-content: center; }
+            .logo { font-size: 1rem; }
+            .logo-img { height: 32px; }
+            .section-title { font-size: 1.6rem; }
+            .map-section iframe { height: 220px; }
+            .partner-section { padding: 30px 16px; }
+            .volunteer-donate { padding: 30px 16px; }
+            .find-us-section { padding: 30px 16px; }
+            .social-section { padding: 30px 16px; }
+            .find-us-item .icon { width: 40px; height: 40px; font-size: 1rem; }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 1.8rem; }
+            .btn-primary, .btn-secondary { padding: 10px 24px; font-size: 0.85rem; }
+            .btn-outline-pink { padding: 8px 20px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR (matching index) ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="partners/elephante.png" alt="Elephante Commons" class="logo-img">
+            <span>ELEPHANTE <span class="highlight">COMMONS</span></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="menu.html">MENU</a>
+            <a href="space.html">SPACES</a>
+            <a href="partner.html">PARTNERS</a>
+            <a href="lodge.html">LODGE</a>
+            <a href="connect.html" >CONNECT</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="menu.html">MENU</a>
+            <a href="space.html">SPACES</a>
+            <a href="partner.html">PARTNERS</a>
+            <a href="lodge.html">LODGE</a>
+            <a href="connect.html" >CONNECT</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="connect">
+        <h1>CONNECT<br>WITH US</h1>
+        <p>We'd love to hear from you — whether you're a partner, a volunteer, or just curious about what we do.</p>
+        <div class="deco-line"></div>
+    </section>
+
+    <!-- ===== PARTNER SECTION ===== -->
+    <section class="partner-section fade-up" id="partners">
+        <div class="partner-grid">
+            <div class="partner-content">
+                <h2><span class="highlight">PARTNER</span></h2>
+                <p>We love our partners and we know there are more people out there who want to do things that are just as epic and we just haven't met you yet! So let's connect! We want to hear from the next generation of changemakers and visionaries in Gulu!</p>
+                <a href="partner.html" class="btn-primary">Learn More →</a>
+            </div>
+            <div class="partner-card">
+                <div class="icon"><i class="fas fa-handshake"></i></div>
+                <h3>VISIT US</h3>
+                <p>You're most welcome! If you're already in Gulu, you can find us here! If you're from out of town, we love hosting visitors! We work with Lorem Icons to plan your entire visit from airport to airport! Come alone or bring a whole team and share in the celebration happening at Elephante!</p>
+                <a href="#" class="btn-outline-pink" style="margin-top:16px; display:inline-block;">Contact Us →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VOLUNTEER & DONATE ===== -->
+    <section class="fade-up" style="background: #ffffff; width: 100%; margin: 0;">
+        <div class="volunteer-donate">
+            <div class="vd-card">
+                <div class="icon"><i class="fas fa-hands-helping"></i></div>
+                <h2>VOLUNTEER</h2>
+                <p>Do you have some free time to come out here and do life with us in Gulu? Or maybe you have a skill you could share with us from abroad? There are so many ways to get involved at Elephante. If you're wondering if we want to work with you, the answer is yes!</p>
+                <a href="#" class="btn-secondary">Contact Us →</a>
+            </div>
+            <div class="vd-card">
+                <div class="icon"><i class="fas fa-heart" style="color: #2c7a4d;"></i></div>
+                <h2>DONATE</h2>
+                <p>We rely on the generosity of people like you to keep going! We can't do it without you! Even $10 a month makes a HUGE difference for us and our partners! Join the Herd of supporters and be part of one favorite global community!</p>
+                <a href="https://www.elephantecommons.co.ug/give-old" class="btn-primary">Learn More →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW TO FIND US ===== -->
+    <section class="find-us-section fade-up">
+        <h2 class="section-title">How to <span class="highlight">Find Us</span></h2>
+        <div class="section-divider"></div>
+        <div class="find-us">
+            <div class="find-us-info">
+                <div class="find-us-item">
+                    <div class="icon"><i class="fas fa-directions"></i></div>
+                    <div>
+                        <h4>DIRECTIONS</h4>
+                        <p>From the Main Market, after Holy Rosary, go straight until you see our sign. It's a pink gate and blue building.</p>
+                    </div>
+                </div>
+                <div class="find-us-item">
+                    <div class="icon blue"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <h4>HOURS</h4>
+                        <p>Monday - Saturday 9am - 9pm<br>Sundays 1am - 9pm</p>
+                    </div>
+                </div>
+                <div class="find-us-item">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <h4>CONTACT</h4>
+                        <p>Email: hello@elephantecommons.org<br>Phone &amp; WhatsApp: 0782 389 824</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAP ===== -->
+    <section class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15957.473902658227!2d32.2945!3d2.7739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1771f0c3e5d9a3e7%3A0x8a8a5b1f3d9a4c2d!2sGulu%2C%20Uganda!5e0!3m2!1sen!2sus!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- ===== SOCIAL LINKS ===== -->
+    <section class="social-section fade-up">
+        <h2 class="section-title">Follow <span class="highlight">Us</span></h2>
+        <div class="section-divider"></div>
+        <div class="social-grid">
+            <a href="https://www.instagram.com/elephantecommons/" class="social-link instagram"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.youtube.com/channel/UCCSiIuLF7ZQTCjzLFTHvP-g" class="social-link youtube"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="https://wa.me/256782389824" class="social-link whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>🐘 Elephante Commons — Where Innovation Meets Community</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="menu.html">Menu</a>
+            <a href="space.html">Spaces</a>
+            <a href="partner.html">Partners</a>
+            <a href="lodge.html">Lodge</a>
+        </div>
+        <p><i class="fas fa-heart"></i> Gulu, Northern Uganda &nbsp;·&nbsp; <i class="fas fa-phone-alt"></i> +256 0782 389 824</p>
+        <p style="font-size:0.75rem; opacity:0.4; margin-top:8px;">Built with love for the community that inspires us every day.</p>
+    </footer>
+
+    <script>
+        // ===== HAMBURGER MENU TOGGLE =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // ===== FADE-UP OBSERVER =====
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('.nav-links a, .footer-links a, .mobile-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href !== '#' && href.startsWith('#')) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        console.log('🐘 Elephante Commons — Connect Page');
+    </script>
+</body>
+</html>
