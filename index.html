@@ -544,10 +544,18 @@
             border-color: rgba(199,162,82,0.2);
             box-shadow: 0 20px 40px rgba(0,0,0,0.04);
         }
-        .space-card .emoji {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 16px;
+        .space-card .space-icon {
+    width: 85%;                    
+    max-width: 280px;              
+    height: 200px;                 
+    object-fit: cover;             
+    margin: 0 auto 16px;           
+    display: block;
+    border: 2px solid rgba(44,122,77,0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+        .space-card:hover .space-icon {
+            transform: scale(1.05);
         }
         .space-card h3 {
             font-size: 1.2rem;
@@ -652,6 +660,7 @@
             .feature-card { border-right: 1px solid rgba(44,122,77,0.08); }
             .image-card { border-right: 1px solid rgba(44,122,77,0.08); }
             .space-card { border-right: 1px solid rgba(44,122,77,0.06); }
+            .space-card .space-icon { width: 60px; height: 60px; }
         }
 
         /* Mobile */
@@ -676,6 +685,7 @@
             .feature-card { border-right: 1px solid rgba(44,122,77,0.08); }
             .image-card { border-right: 1px solid rgba(44,122,77,0.08); }
             .space-card { border-right: 1px solid rgba(44,122,77,0.06); }
+            .space-card .space-icon { width: 50px; height: 50px; }
         }
 
         /* Small Mobile */
@@ -689,6 +699,7 @@
             .section-title { font-size: 1.6rem; }
             .cta-section h2 { font-size: 1.5rem; }
             .cta-section p { font-size: 0.9rem; }
+            .space-card .space-icon { width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -837,25 +848,25 @@
             <p class="section-subtitle fade-up">From coworking to community events — there's a space for everyone at Elephante.</p>
             <div class="spaces-grid fade-up">
                 <div class="space-card">
-                    <span class="emoji">💻</span>
+                    <img src="partners/coworking.jpg" alt="Coworking" class="space-icon">
                     <h3>Coworking</h3>
                     <p>Flexible desks, high-speed WiFi, and a vibrant community of changemakers.</p>
                     <a href="space.html" class="link">Learn More →</a>
                 </div>
                 <div class="space-card">
-                    <span class="emoji">☕</span>
+                    <img src="partners/cafe.jpg" alt="Cafe" class="space-icon">
                     <h3>Cafe</h3>
                     <p>Fresh coffee, delicious meals, and a warm atmosphere — the heart of Elephante.</p>
                     <a href="menu.html" class="link">View Menu →</a>
                 </div>
                 <div class="space-card">
-                    <span class="emoji">🏠</span>
+                    <img src="partners/Lodge.jpg" alt="Lodge" class="space-icon">
                     <h3>Lodge</h3>
                     <p>Comfortable rooms and bunkhouse accommodation for travelers and retreats.</p>
                     <a href="lodge.html" class="link">Book a Stay →</a>
                 </div>
                 <div class="space-card">
-                    <span class="emoji">🎉</span>
+                    <img src="partners/event.jpg" alt="Events" class="space-icon">
                     <h3>Events</h3>
                     <p>Game nights, concerts, workshops, and community gatherings — everyone is welcome.</p>
                     <a href="https://www.elephantecommons.co.ug/events" class="link">See Events →</a>
