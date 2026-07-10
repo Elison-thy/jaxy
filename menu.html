@@ -8,6 +8,115 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ===== CSS CUSTOM PROPERTIES ===== */
+        :root {
+            /* Light mode (default) */
+            --bg-primary: #f8f4ff;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-alt: #faf8f5;
+            --bg-navbar: rgba(26, 35, 50, 0.95);
+            --text-primary: #1a1a2e;
+            --text-secondary: rgba(26,26,46,0.6);
+            --text-muted: rgba(26,26,46,0.3);
+            --text-nav: rgba(232, 221, 208, 0.7);
+            --text-nav-hover: #ffffff;
+            --border-color: rgba(44,122,77,0.06);
+            --border-color-strong: rgba(44,122,77,0.15);
+            --shadow-color: rgba(0,0,0,0.08);
+            --shadow-color-strong: rgba(0,0,0,0.12);
+            --gradient-start: #2c7a4d;
+            --gradient-end: #c7a252;
+            --hero-bg-start: #2c7a4d;
+            --hero-bg-end: #c7a252;
+            --hero-text: #ffffff;
+            --hero-text-secondary: rgba(255,255,255,0.8);
+            --hero-hours-bg: rgba(255,255,255,0.15);
+            --hero-hours-border: rgba(255,255,255,0.1);
+            --hero-phone-text: #ffffff;
+            --hero-phone-hover: #c7a252;
+            --tab-bg: #ffffff;
+            --tab-text: #1a1a2e;
+            --tab-border: rgba(44,122,77,0.15);
+            --tab-active-bg: linear-gradient(135deg, #2c7a4d, #c7a252);
+            --tab-active-text: #ffffff;
+            --tab-hover-bg: rgba(44,122,77,0.05);
+            --menu-bg: #ffffff;
+            --img-bg: rgba(44,122,77,0.03);
+            --img-border: rgba(44,122,77,0.06);
+            --price-bg: rgba(44,122,77,0.08);
+            --price-color: #2c7a4d;
+            --tag-bg: rgba(44,122,77,0.08);
+            --tag-color: #2c7a4d;
+            --tag-green-bg: rgba(44,122,77,0.12);
+            --tag-green-color: #1a5a3a;
+            --tag-gold-bg: rgba(199,162,82,0.15);
+            --tag-gold-color: #8a6a22;
+            --info-note-bg: rgba(44,122,77,0.05);
+            --info-note-text: rgba(26,26,46,0.5);
+            --footer-bg: #ffffff;
+            --footer-border: rgba(44,122,77,0.08);
+            --scrollbar-track: #f0ecf8;
+            --scrollbar-thumb-start: #2c7a4d;
+            --scrollbar-thumb-end: #c7a252;
+            --no-image-color: rgba(26,26,46,0.4);
+            --no-image-icon: #2c7a4d;
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0d0d1a;
+                --bg-secondary: #16162b;
+                --bg-card: #1a1a33;
+                --bg-card-alt: #131328;
+                --bg-navbar: rgba(13, 13, 26, 0.98);
+                --text-primary: #e8e0f0;
+                --text-secondary: rgba(200, 190, 220, 0.6);
+                --text-muted: rgba(200, 190, 220, 0.3);
+                --text-nav: rgba(200, 190, 220, 0.6);
+                --text-nav-hover: #ffffff;
+                --border-color: rgba(44,122,77,0.15);
+                --border-color-strong: rgba(44,122,77,0.25);
+                --shadow-color: rgba(0,0,0,0.3);
+                --shadow-color-strong: rgba(0,0,0,0.4);
+                --hero-bg-start: #1a3a2a;
+                --hero-bg-end: #8a7a42;
+                --hero-text: #e8e0f0;
+                --hero-text-secondary: rgba(200, 190, 220, 0.8);
+                --hero-hours-bg: rgba(0,0,0,0.3);
+                --hero-hours-border: rgba(255,255,255,0.05);
+                --hero-phone-text: #e8e0f0;
+                --hero-phone-hover: #c7a252;
+                --tab-bg: #16162b;
+                --tab-text: #c8bede;
+                --tab-border: rgba(44,122,77,0.2);
+                --tab-active-bg: linear-gradient(135deg, #2c7a4d, #c7a252);
+                --tab-active-text: #ffffff;
+                --tab-hover-bg: rgba(44,122,77,0.1);
+                --menu-bg: #16162b;
+                --img-bg: rgba(44,122,77,0.08);
+                --img-border: rgba(44,122,77,0.12);
+                --price-bg: rgba(44,122,77,0.15);
+                --price-color: #4a9a6d;
+                --tag-bg: rgba(44,122,77,0.15);
+                --tag-color: #4a9a6d;
+                --tag-green-bg: rgba(44,122,77,0.2);
+                --tag-green-color: #4a9a6d;
+                --tag-gold-bg: rgba(199,162,82,0.2);
+                --tag-gold-color: #c7a252;
+                --info-note-bg: rgba(44,122,77,0.08);
+                --info-note-text: rgba(200, 190, 220, 0.5);
+                --footer-bg: #16162b;
+                --footer-border: rgba(44,122,77,0.12);
+                --scrollbar-track: #16162b;
+                --scrollbar-thumb-start: #2c7a4d;
+                --scrollbar-thumb-end: #c7a252;
+                --no-image-color: rgba(200, 190, 220, 0.4);
+                --no-image-icon: #4a9a6d;
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,15 +127,16 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: #f8f4ff;
-            color: #1a1a2e;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f0ecf8; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #2c7a4d, #c7a252); }
+        ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--scrollbar-thumb-start), var(--scrollbar-thumb-end)); }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -43,22 +153,23 @@
             transform: translateY(0);
         }
 
-        /* ===== NAVBAR — FIXED TO TOP (matching index) ===== */
+        /* ===== NAVBAR — FIXED TO TOP ===== */
         .navbar {
             padding: 8px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            background: rgba(26, 35, 50, 0.95);
+            background: var(--bg-navbar);
             backdrop-filter: blur(16px);
             margin: 0;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 40px var(--shadow-color);
             border-bottom: 1px solid rgba(255,255,255,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
             width: 100%;
+            transition: background 0.3s ease;
         }
         .logo {
             display: flex;
@@ -67,7 +178,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 1.2rem;
             font-weight: 800;
-            color: #e8ddd0;
+            color: var(--text-nav);
             letter-spacing: -0.5px;
             text-decoration: none;
         }
@@ -90,7 +201,7 @@
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
-            color: rgba(232, 221, 208, 0.7);
+            color: var(--text-nav);
             padding: 8px 18px;
             transition: all 0.3s ease;
             font-size: 0.85rem;
@@ -98,10 +209,10 @@
             border-radius: 0;
         }
         .nav-links a:hover {
-            color: #ffffff;
+            color: var(--text-nav-hover);
         }
         .nav-links a.active {
-            color: #ffffff;
+            color: var(--text-nav-hover);
             background: rgba(192, 57, 43, 0.15);
         }
         .nav-links a.cta-nav {
@@ -128,7 +239,7 @@
             display: block;
             width: 28px;
             height: 3px;
-            background: #e8ddd0;
+            background: var(--text-nav);
             transition: all 0.3s ease;
             border-radius: 0;
         }
@@ -147,7 +258,7 @@
             display: none;
             flex-direction: column;
             width: 100%;
-            background: rgba(26, 35, 50, 0.98);
+            background: var(--bg-navbar);
             padding: 16px 20px;
             border-top: 1px solid rgba(255,255,255,0.05);
             gap: 6px;
@@ -155,7 +266,7 @@
         .mobile-menu a {
             text-decoration: none;
             font-weight: 600;
-            color: rgba(232, 221, 208, 0.7);
+            color: var(--text-nav);
             padding: 10px 18px;
             transition: all 0.3s ease;
             font-size: 0.95rem;
@@ -163,11 +274,11 @@
             border-radius: 0;
         }
         .mobile-menu a:hover {
-            color: #ffffff;
+            color: var(--text-nav-hover);
             background: rgba(255,255,255,0.05);
         }
         .mobile-menu a.active {
-            color: #ffffff;
+            color: var(--text-nav-hover);
             background: rgba(192, 57, 43, 0.15);
         }
         .mobile-menu a.cta-nav {
@@ -188,12 +299,13 @@
         .cafe-hero {
             text-align: center;
             padding: 50px 24px 35px;
-            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            background: linear-gradient(135deg, var(--hero-bg-start), var(--hero-bg-end));
             margin: 0;
             width: 100%;
             border-bottom: 4px solid #1a5a3a;
             position: relative;
             overflow: hidden;
+            transition: background 0.3s ease;
         }
         .cafe-hero::before {
             content: '';
@@ -219,14 +331,14 @@
             font-family: 'Playfair Display', serif;
             font-size: 4.5rem;
             font-weight: 900;
-            color: #ffffff;
+            color: var(--hero-text);
             letter-spacing: -0.02em;
             position: relative;
             z-index: 1;
         }
         .cafe-brand-sub {
             font-size: 1.2rem;
-            color: rgba(255,255,255,0.8);
+            color: var(--hero-text-secondary);
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-top: -8px;
@@ -236,7 +348,7 @@
         .cafe-divider {
             width: 60px;
             height: 3px;
-            background: #c7a252;
+            background: var(--gradient-end);
             margin: 15px auto 10px;
             position: relative;
             z-index: 1;
@@ -248,9 +360,9 @@
             gap: 30px;
             margin-top: 20px;
             padding: 16px 28px;
-            background: rgba(255,255,255,0.15);
+            background: var(--hero-hours-bg);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--hero-hours-border);
             position: relative;
             z-index: 1;
             max-width: 600px;
@@ -263,30 +375,30 @@
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
-            color: #ffffff;
+            color: var(--hero-text);
         }
         .cafe-hours .hour-item i {
-            color: #c7a252;
+            color: var(--gradient-end);
             font-size: 1rem;
         }
         .cafe-phone {
             margin-top: 16px;
             font-size: 1.1rem;
-            color: #ffffff;
+            color: var(--hero-text);
             position: relative;
             z-index: 1;
         }
         .cafe-phone i {
-            color: #c7a252;
+            color: var(--gradient-end);
             margin-right: 8px;
         }
         .cafe-phone a {
-            color: #ffffff;
+            color: var(--hero-phone-text);
             text-decoration: none;
             font-weight: 600;
         }
         .cafe-phone a:hover {
-            color: #c7a252;
+            color: var(--hero-phone-hover);
         }
 
         /* ===== CATEGORY TABS ===== */
@@ -298,35 +410,36 @@
             padding: 20px 24px;
             margin: 0;
             width: 100%;
-            background: #ffffff;
-            border-bottom: 1px solid rgba(44,122,77,0.08);
+            background: var(--tab-bg);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease;
         }
         .tab-btn {
-            background: white;
+            background: var(--tab-bg);
             border: none;
             padding: 10px 22px;
             font-weight: 600;
-            color: #1a1a2e;
+            color: var(--tab-text);
             cursor: pointer;
             transition: all 0.25s;
             font-size: 0.8rem;
-            border: 1px solid rgba(44,122,77,0.15);
+            border: 1px solid var(--tab-border);
             font-family: 'Inter', sans-serif;
             border-radius: 0;
         }
         .tab-btn i { margin-right: 6px; }
         .tab-btn.active {
-            background: linear-gradient(135deg, #2c7a4d, #c7a252);
-            color: white;
+            background: var(--tab-active-bg);
+            color: var(--tab-active-text);
             border-color: transparent;
             box-shadow: 0 6px 20px rgba(44,122,77,0.2);
         }
         .tab-btn:hover:not(.active) {
-            background: rgba(44,122,77,0.05);
+            background: var(--tab-hover-bg);
             transform: translateY(-2px);
         }
 
-        /* ===== MENU GRID - FULL WIDTH IMAGES WITH SPACING ===== */
+        /* ===== MENU GRID ===== */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -334,13 +447,14 @@
             padding: 0;
             margin: 0;
             width: 100%;
-            background: #ffffff;
+            background: var(--menu-bg);
+            transition: background 0.3s ease;
         }
         .menu-card {
-            background: white;
+            background: var(--bg-card);
             overflow: hidden;
             transition: all 0.3s ease;
-            border: 1px solid rgba(44,122,77,0.06);
+            border: 1px solid var(--border-color);
             border-right: none;
             border-bottom: none;
             display: flex;
@@ -348,12 +462,12 @@
             height: 100%;
         }
         .menu-card:nth-child(even) {
-            background: #faf8f5;
+            background: var(--bg-card-alt);
         }
         .menu-card:hover {
-            background: #ffffff;
-            border-color: rgba(44,122,77,0.15);
-            box-shadow: 0 8px 25px rgba(44,122,77,0.06);
+            background: var(--bg-card);
+            border-color: var(--border-color-strong);
+            box-shadow: 0 8px 25px var(--shadow-color);
             z-index: 1;
         }
 
@@ -363,25 +477,26 @@
             justify-content: center;
             gap: 0;
             padding: 12px 12px 0 12px;
-            background: rgba(44,122,77,0.03);
+            background: var(--img-bg);
             min-height: 200px;
             align-items: center;
-            border-bottom: 1px solid rgba(44,122,77,0.06);
+            border-bottom: 1px solid var(--img-border);
             width: 100%;
+            transition: background 0.3s ease;
         }
         .menu-img-container .img-wrapper {
             width: 100%;
             height: 200px;
             overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            background: rgba(44,122,77,0.03);
+            background: var(--img-bg);
             flex-shrink: 0;
             border-radius: 0;
             border: none;
         }
         .menu-img-container .img-wrapper:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(44,122,77,0.08);
+            box-shadow: 0 8px 25px var(--shadow-color);
         }
         .menu-img-container .img-wrapper img {
             width: 100%;
@@ -395,8 +510,8 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            background: rgba(44,122,77,0.05);
-            color: rgba(26,26,46,0.4);
+            background: var(--img-bg);
+            color: var(--no-image-color);
             font-size: 0.8rem;
             text-align: center;
             padding: 10px;
@@ -405,7 +520,7 @@
         }
         .menu-img-container .img-wrapper .no-image i {
             font-size: 2.5rem;
-            color: #2c7a4d;
+            color: var(--no-image-icon);
             opacity: 0.3;
         }
         .menu-img-container .img-label {
@@ -421,7 +536,7 @@
         .menu-title {
             font-size: 1.05rem;
             font-weight: 700;
-            color: #1a1a2e;
+            color: var(--text-primary);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -430,14 +545,14 @@
         .menu-price {
             font-size: 0.85rem;
             font-weight: 800;
-            color: #2c7a4d;
-            background: rgba(44,122,77,0.08);
+            color: var(--price-color);
+            background: var(--price-bg);
             padding: 3px 14px;
             white-space: nowrap;
             border-radius: 0;
         }
         .menu-desc {
-            color: rgba(26,26,46,0.6);
+            color: var(--text-secondary);
             margin-top: 8px;
             font-size: 0.8rem;
             line-height: 1.6;
@@ -451,44 +566,46 @@
         }
         .tag {
             font-size: 0.55rem;
-            background: rgba(44,122,77,0.08);
-            color: #2c7a4d;
+            background: var(--tag-bg);
+            color: var(--tag-color);
             padding: 2px 10px;
             font-weight: 600;
             border-radius: 0;
         }
-        .tag.gluten-free { background: rgba(44,122,77,0.12); color: #1a5a3a; }
-        .tag.vegetarian { background: rgba(44,122,77,0.12); color: #1a5a3a; }
-        .tag.vegan { background: rgba(44,122,77,0.12); color: #1a5a3a; }
-        .tag.mild { background: rgba(199,162,82,0.15); color: #8a6a22; }
+        .tag.gluten-free { background: var(--tag-green-bg); color: var(--tag-green-color); }
+        .tag.vegetarian { background: var(--tag-green-bg); color: var(--tag-green-color); }
+        .tag.vegan { background: var(--tag-green-bg); color: var(--tag-green-color); }
+        .tag.mild { background: var(--tag-gold-bg); color: var(--tag-gold-color); }
 
         /* ===== INFO NOTE ===== */
         .info-note {
-            background: rgba(44,122,77,0.05);
+            background: var(--info-note-bg);
             padding: 16px 24px;
             text-align: center;
             margin: 0;
             width: 100%;
             font-size: 0.8rem;
-            color: rgba(26,26,46,0.5);
-            border-top: 1px solid rgba(44,122,77,0.06);
-            border-bottom: 1px solid rgba(44,122,77,0.06);
+            color: var(--info-note-text);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .info-note i {
-            color: #2c7a4d;
+            color: var(--gradient-start);
         }
 
         /* ===== FOOTER ===== */
         footer {
             text-align: center;
             padding: 40px;
-            border-top: 1px solid rgba(44,122,77,0.08);
+            border-top: 1px solid var(--footer-border);
             margin: 0;
-            color: rgba(26,26,46,0.3);
+            color: var(--text-muted);
             font-size: 0.85rem;
-            background: #ffffff;
+            background: var(--footer-bg);
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        footer i { color: #2c7a4d; }
+        footer i { color: var(--gradient-start); }
         .footer-links {
             display: flex;
             flex-wrap: wrap;
@@ -497,12 +614,12 @@
             margin: 16px 0;
         }
         .footer-links a {
-            color: rgba(26,26,46,0.4);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        .footer-links a:hover { color: #2c7a4d; }
+        .footer-links a:hover { color: var(--gradient-start); }
 
         /* ===== RESPONSIVE ===== */
 
@@ -523,7 +640,7 @@
             .menu-img-container .img-wrapper { height: 170px; }
             .category-tabs { padding: 16px; }
             .menu-card:nth-child(even) {
-                background: #faf8f5;
+                background: var(--bg-card-alt);
             }
         }
 
@@ -541,7 +658,7 @@
             .tab-btn { padding: 4px 10px; font-size: 0.65rem; }
             .info-note { padding: 12px 16px; font-size: 0.7rem; }
             .menu-card:nth-child(even) {
-                background: #faf8f5;
+                background: var(--bg-card-alt);
             }
         }
 
@@ -562,7 +679,7 @@
 </head>
 <body>
 
-    <!-- ===== NAVBAR (matching index) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <a href="index.html" class="logo">
             <img src="partners/elephante.png" alt="Elephante Commons" class="logo-img">
@@ -1171,15 +1288,6 @@
                 desc: "Bacon, apple slices, caramelized onions.",
                 images: ["Pig in an Orchard (Small).jpg"] 
             },
-            //{ 
-            //    id: 59, 
-            //    name: "Veggie Deluxe (Small)", 
-            //    price: "18,000", 
-             //   category: "pizza", 
-            //    desc: "Green peppers, spinach, onions, olives, tomatoes, mushrooms.", 
-            //    tags: ["Vegetarian"],
-            //    images: ["Veggie Deluxe (Small).JPG"] 
-            //},
             { 
                 id: 60, 
                 name: "Veggie Deluxe (Medium)", 
@@ -1320,14 +1428,6 @@
                 tags: ["Vegetarian"],
                 images: ["Crispy Eggplant Burger.jpg"] 
             },
-           // { 
-           //     id: 76, 
-           //     name: "Korean BBQ Burger", 
-           //     price: "Ugx 29,000", 
-           //     category: "burgers", 
-           //     desc: "Beef patty with Korean BBQ marinade, kimchi mayo, green onions, lettuce, purple cabbage. Sides included.",
-           //     images: ["Korean BBQ Burger.JPG"] 
-           // },
             
             // ===== SALADS =====
             { 
@@ -1561,7 +1661,7 @@
             const filtered = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
             menuGrid.innerHTML = '';
             if (filtered.length === 0) {
-                menuGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:rgba(26,26,46,0.4); font-size:0.9rem; border:1px solid rgba(44,122,77,0.06);">✨ More delicious items coming soon! ✨</div>`;
+                menuGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary); font-size:0.9rem; border:1px solid var(--border-color);">✨ More delicious items coming soon! ✨</div>`;
                 return;
             }
             filtered.forEach(item => {

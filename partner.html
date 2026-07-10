@@ -8,6 +8,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ===== CSS CUSTOM PROPERTIES ===== */
+        :root {
+            /* Light mode (default) */
+            --bg-primary: #f8f4ff;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-navbar: rgba(26, 35, 50, 0.95);
+            --text-primary: #1a1a2e;
+            --text-secondary: rgba(26,26,46,0.7);
+            --text-muted: rgba(26,26,46,0.3);
+            --text-nav: rgba(232, 221, 208, 0.7);
+            --text-nav-hover: #ffffff;
+            --border-color: rgba(44,122,77,0.08);
+            --border-color-strong: rgba(44,122,77,0.15);
+            --shadow-color: rgba(0,0,0,0.08);
+            --shadow-color-strong: rgba(0,0,0,0.12);
+            --gradient-start: #2c7a4d;
+            --gradient-end: #c7a252;
+            --hero-bg: #e8436e;
+            --hero-text: #ffffff;
+            --hero-text-secondary: rgba(255,255,255,0.9);
+            --hero-border: #c0392b;
+            --hero-btn-bg: #1a1a1a;
+            --hero-btn-hover: #c0392b;
+            --cta-bg-start: #f8f0f5;
+            --cta-bg-end: #f0ecf8;
+            --partner-section-bg: #f8f4ff;
+            --partner-section-alt-bg: #ffffff;
+            --card-text-primary: #1a1a1a;
+            --card-text-secondary: rgba(26,26,46,0.7);
+            --footer-border: rgba(44,122,77,0.08);
+            --scrollbar-track: #f0ecf8;
+            --scrollbar-thumb-start: #2c7a4d;
+            --scrollbar-thumb-end: #c7a252;
+            --btn-outline-border: #2c7a4d;
+            --btn-outline-color: #2c7a4d;
+            --img-border: rgba(44,122,77,0.08);
+            --img-border-front: #c7a252;
+            --logo-border: #c7a252;
+            --logo-bg: #ffffff;
+            --cta-text: rgba(26,26,46,0.5);
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0d0d1a;
+                --bg-secondary: #16162b;
+                --bg-card: #1a1a33;
+                --bg-navbar: rgba(13, 13, 26, 0.98);
+                --text-primary: #e8e0f0;
+                --text-secondary: rgba(200, 190, 220, 0.7);
+                --text-muted: rgba(200, 190, 220, 0.3);
+                --text-nav: rgba(200, 190, 220, 0.6);
+                --text-nav-hover: #ffffff;
+                --border-color: rgba(44,122,77,0.15);
+                --border-color-strong: rgba(44,122,77,0.25);
+                --shadow-color: rgba(0,0,0,0.3);
+                --shadow-color-strong: rgba(0,0,0,0.4);
+                --hero-bg: #8a2a4a;
+                --hero-text: #e8e0f0;
+                --hero-text-secondary: rgba(200, 190, 220, 0.9);
+                --hero-border: #6a1a3a;
+                --hero-btn-bg: #2a2a3a;
+                --hero-btn-hover: #c0392b;
+                --cta-bg-start: #0d0d1a;
+                --cta-bg-end: #16162b;
+                --partner-section-bg: #0d0d1a;
+                --partner-section-alt-bg: #16162b;
+                --card-text-primary: #e8e0f0;
+                --card-text-secondary: rgba(200, 190, 220, 0.7);
+                --footer-border: rgba(44,122,77,0.12);
+                --scrollbar-track: #16162b;
+                --scrollbar-thumb-start: #2c7a4d;
+                --scrollbar-thumb-end: #c7a252;
+                --btn-outline-border: #4a9a6d;
+                --btn-outline-color: #4a9a6d;
+                --img-border: rgba(44,122,77,0.15);
+                --img-border-front: #c7a252;
+                --logo-border: #c7a252;
+                --logo-bg: #1a1a33;
+                --cta-text: rgba(200, 190, 220, 0.5);
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,15 +103,16 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: #f8f4ff;
-            color: #1a1a2e;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f0ecf8; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #2c7a4d, #c7a252); }
+        ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--scrollbar-thumb-start), var(--scrollbar-thumb-end)); }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -49,22 +135,23 @@
             padding: 0 5px;
         }
 
-        /* ===== NAVBAR — FIXED TO TOP (matching index) ===== */
+        /* ===== NAVBAR — FIXED TO TOP ===== */
         .navbar {
             padding: 8px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            background: rgba(26, 35, 50, 0.95);
+            background: var(--bg-navbar);
             backdrop-filter: blur(16px);
             margin: 0;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 40px var(--shadow-color);
             border-bottom: 1px solid rgba(255,255,255,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
             width: 100%;
+            transition: background 0.3s ease;
         }
         .logo {
             display: flex;
@@ -73,7 +160,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 1.2rem;
             font-weight: 800;
-            color: #e8ddd0;
+            color: var(--text-nav);
             letter-spacing: -0.5px;
             text-decoration: none;
         }
@@ -96,7 +183,7 @@
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
-            color: rgba(232, 221, 208, 0.7);
+            color: var(--text-nav);
             padding: 8px 18px;
             transition: all 0.3s ease;
             font-size: 0.85rem;
@@ -104,10 +191,10 @@
             border-radius: 0;
         }
         .nav-links a:hover {
-            color: #ffffff;
+            color: var(--text-nav-hover);
         }
         .nav-links a.active {
-            color: #ffffff;
+            color: var(--text-nav-hover);
             background: rgba(192, 57, 43, 0.15);
         }
         .nav-links a.cta-nav {
@@ -134,7 +221,7 @@
             display: block;
             width: 28px;
             height: 3px;
-            background: #e8ddd0;
+            background: var(--text-nav);
             transition: all 0.3s ease;
             border-radius: 0;
         }
@@ -153,7 +240,7 @@
             display: none;
             flex-direction: column;
             width: 100%;
-            background: rgba(26, 35, 50, 0.98);
+            background: var(--bg-navbar);
             padding: 16px 20px;
             border-top: 1px solid rgba(255,255,255,0.05);
             gap: 6px;
@@ -161,7 +248,7 @@
         .mobile-menu a {
             text-decoration: none;
             font-weight: 600;
-            color: rgba(232, 221, 208, 0.7);
+            color: var(--text-nav);
             padding: 10px 18px;
             transition: all 0.3s ease;
             font-size: 0.95rem;
@@ -169,11 +256,11 @@
             border-radius: 0;
         }
         .mobile-menu a:hover {
-            color: #ffffff;
+            color: var(--text-nav-hover);
             background: rgba(255,255,255,0.05);
         }
         .mobile-menu a.active {
-            color: #ffffff;
+            color: var(--text-nav-hover);
             background: rgba(192, 57, 43, 0.15);
         }
         .mobile-menu a.cta-nav {
@@ -192,12 +279,13 @@
 
         /* ===== HERO WITH PINK BACKGROUND ===== */
         .partner-hero {
-            background: #e8436e;
-            color: #ffffff;
+            background: var(--hero-bg);
+            color: var(--hero-text);
             padding: 80px 40px;
             text-align: center;
-            border-bottom: 4px solid #c0392b;
+            border-bottom: 4px solid var(--hero-border);
             margin: 0;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .partner-hero h1 {
             font-family: 'Playfair Display', serif;
@@ -217,8 +305,8 @@
         .partner-hero .btn {
             display: inline-block;
             padding: 14px 40px;
-            background: #1a1a1a;
-            color: #ffffff;
+            background: var(--hero-btn-bg);
+            color: var(--hero-text);
             font-weight: 700;
             text-decoration: none;
             transition: all 0.3s;
@@ -226,7 +314,7 @@
             border-radius: 0;
         }
         .partner-hero .btn:hover {
-            background: #c0392b;
+            background: var(--hero-btn-hover);
             color: #ffffff;
         }
 
@@ -235,20 +323,20 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.6rem;
             text-align: center;
-            color: #1a1a2e;
+            color: var(--text-primary);
             margin-bottom: 10px;
         }
-        .section-title .pink { color: #2c7a4d; }
-        .section-title .blue { color: #c7a252; }
+        .section-title .pink { color: var(--gradient-start); }
+        .section-title .blue { color: var(--gradient-end); }
         .section-divider {
             width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, #2c7a4d, #c7a252);
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
             margin: 12px auto 30px;
         }
         .section-subtitle {
             text-align: center;
-            color: rgba(26,26,46,0.5);
+            color: var(--text-secondary);
             max-width: 650px;
             margin: 0 auto 40px;
             font-size: 1.05rem;
@@ -257,11 +345,12 @@
         /* ===== PARTNER SECTION - NO GAPS, NO MARGINS ===== */
         .partner-section {
             padding: 60px 40px;
-            background: #f8f4ff;
+            background: var(--partner-section-bg);
             margin: 0;
+            transition: background 0.3s ease;
         }
         .partner-section:nth-child(even) {
-            background: #ffffff;
+            background: var(--partner-section-alt-bg);
         }
 
         /* ===== PARTNER CARD (flat, no radius, no gaps) ===== */
@@ -272,14 +361,36 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 50px 0;
-            border-bottom: 2px solid rgba(44,122,77,0.08);
+            border-bottom: 2px solid var(--border-color);
             gap: 0;
+            position: relative;
         }
         .partner-card:last-child {
             border-bottom: none;
         }
         .partner-card.reverse {
             flex-direction: row-reverse;
+        }
+
+        /* ===== CARD LOGO POSITION (top right) ===== */
+        .partner-card .card-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--logo-border);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            background: var(--logo-bg);
+            padding: 4px;
+            transition: all 0.3s ease;
+        }
+        .partner-card .card-logo:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 8px 25px var(--shadow-color-strong);
         }
 
         .partner-card .text {
@@ -295,25 +406,25 @@
             font-size: 2.2rem;
             font-weight: 900;
             margin-bottom: 12px;
-            color: #1a1a1a;
+            color: var(--card-text-primary);
         }
         .partner-card .text h2 i {
-            color: #2c7a4d;
+            color: var(--gradient-start);
             margin-right: 10px;
         }
         .partner-card .text h2 .highlight {
-            color: #c7a252;
+            color: var(--gradient-end);
         }
         .partner-card .text p {
             font-size: 1rem;
             line-height: 1.7;
-            color: rgba(26,26,46,0.7);
+            color: var(--card-text-secondary);
             margin-bottom: 16px;
         }
         .partner-card .text .btn {
             display: inline-block;
             padding: 10px 28px;
-            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: #ffffff;
             font-weight: 700;
             text-decoration: none;
@@ -327,12 +438,12 @@
         }
         .partner-card .text .btn-outline {
             background: transparent;
-            border: 2px solid #2c7a4d;
-            color: #2c7a4d;
+            border: 2px solid var(--btn-outline-border);
+            color: var(--btn-outline-color);
             border-radius: 0;
         }
         .partner-card .text .btn-outline:hover {
-            background: #2c7a4d;
+            background: var(--gradient-start);
             color: #ffffff;
         }
 
@@ -345,14 +456,14 @@
             max-width: 100%;
             max-height: 320px;
             object-fit: cover;
-            border: 2px solid rgba(44,122,77,0.08);
+            border: 2px solid var(--img-border);
             display: block;
             margin: 0 auto;
             border-radius: 0;
         }
         .partner-card .image .img-label {
             font-size: 0.75rem;
-            color: rgba(26,26,46,0.4);
+            color: var(--text-secondary);
             margin-top: 6px;
         }
 
@@ -365,7 +476,7 @@
         }
         .partner-card .image-grid img {
             max-height: 260px;
-            border: 2px solid rgba(44,122,77,0.08);
+            border: 2px solid var(--img-border);
             display: block;
             border-radius: 0;
         }
@@ -381,13 +492,13 @@
         .overlap-container .img-back {
             position: relative;
             z-index: 1;
-            border: 2px solid rgba(44,122,77,0.08);
+            border: 2px solid var(--img-border);
             border-radius: 0;
         }
         .overlap-container .img-front {
             position: absolute;
             z-index: 2;
-            border: 3px solid #c7a252;
+            border: 3px solid var(--img-border-front);
             transition: transform 0.3s ease;
             border-radius: 0;
         }
@@ -395,32 +506,33 @@
             transform: rotate(6deg) scale(1.04);
         }
 
-        /* ===== CTA SECTION (flat, no radius) ===== */
+        /* ===== CTA SECTION ===== */
         .cta-section {
-            background: linear-gradient(135deg, #f8f0f5, #f0ecf8);
+            background: linear-gradient(135deg, var(--cta-bg-start), var(--cta-bg-end));
             padding: 60px 40px;
             text-align: center;
             margin: 0;
-            border-top: 1px solid rgba(44,122,77,0.08);
+            border-top: 1px solid var(--border-color);
+            transition: background 0.3s ease;
         }
         .cta-section h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2.6rem;
-            color: #1a1a2e;
+            color: var(--text-primary);
         }
         .cta-section h2 span {
-            color: #2c7a4d;
+            color: var(--gradient-start);
         }
         .cta-section p {
             font-size: 1.05rem;
-            opacity: 0.8;
+            color: var(--cta-text);
             max-width: 600px;
             margin: 16px auto 32px;
         }
         .cta-section .btn {
             display: inline-block;
             padding: 18px 52px;
-            background: linear-gradient(135deg, #2c7a4d, #c7a252);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: #ffffff;
             font-weight: 700;
             text-decoration: none;
@@ -438,12 +550,14 @@
         footer {
             text-align: center;
             padding: 40px;
-            border-top: 1px solid rgba(44,122,77,0.08);
+            border-top: 1px solid var(--footer-border);
             margin: 0;
-            color: rgba(26,26,46,0.3);
+            color: var(--text-muted);
             font-size: 0.85rem;
+            background: var(--bg-secondary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        footer i { color: #2c7a4d; }
+        footer i { color: var(--gradient-start); }
         .footer-links {
             display: flex;
             flex-wrap: wrap;
@@ -452,12 +566,12 @@
             margin: 16px 0;
         }
         .footer-links a {
-            color: rgba(26,26,46,0.4);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        .footer-links a:hover { color: #2c7a4d; }
+        .footer-links a:hover { color: var(--gradient-start); }
 
         /* ===== RESPONSIVE ===== */
 
@@ -524,6 +638,12 @@
             .cta-section h2 {
                 font-size: 2rem;
             }
+            .partner-card .card-logo {
+                width: 50px;
+                height: 50px;
+                top: 12px;
+                right: 12px;
+            }
         }
 
         /* Mobile */
@@ -581,6 +701,13 @@
             .section-title {
                 font-size: 1.6rem;
             }
+            .partner-card .card-logo {
+                width: 40px;
+                height: 40px;
+                top: 8px;
+                right: 8px;
+                border-width: 2px;
+            }
         }
 
         /* Small Mobile */
@@ -603,12 +730,19 @@
                 padding: 12px 32px;
                 font-size: 0.9rem;
             }
+            .partner-card .card-logo {
+                width: 35px;
+                height: 35px;
+                top: 6px;
+                right: 6px;
+                border-width: 2px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== NAVBAR (matching index) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <a href="index.html" class="logo">
             <img src="partners/elephante.png" alt="Elephante Commons" class="logo-img">
@@ -656,6 +790,7 @@
     <!-- 1. HAVEN for humanity -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="logo\haven.avif" alt="HAVEN Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-hand-holding-heart"></i>HAVEN <span class="highlight">for humanity</span></h2>
                 <p>Haven for Humanity Uganda is a community-rooted nonprofit in Northern Uganda and the West Nile region addressing child malnutrition and family vulnerability with long-term, dignity-based solutions. Through integrated pillars in health, nutrition, economic empowerment, psychosocial support, and education, HHU provides treatment and prevention services while strengthening families through savings groups and income-generating activities. Centered on women's leadership and community resilience, HHU walks alongside families to build stability and opportunity - not short-term aid.</p>
@@ -670,6 +805,7 @@
     <!-- 2. Gender Tech Initiative -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\gender.avif" alt="Gender Tech Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-laptop-code"></i>Gender Tech <span class="highlight">Initiative</span></h2>
                 <p>Gender Tech Initiative Uganda equips women and girls in STEM and ICT with the skills, mentorship, and support they need to build technology careers. The initiative addresses barriers like online harassment, limited early exposure, and lack of mentorship through programs in digital safety, cybersecurity, digital marketing, and school ICT clubs. Gender Tech helps participants use technology to grow businesses, stay safe online, and step into leadership.</p>
@@ -684,6 +820,7 @@
     <!-- 3. Wokober Education -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/wokobereducation1.avif" alt="Wokober Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-graduation-cap"></i>Wokober <span class="highlight">Education</span></h2>
                 <p>Wokober Education Foundation is reimagining education in Northern Uganda by shifting learning from exams to creativity, experimentation, and problem-solving. Built on the belief that children and youth have immense potential that systems often limit, Wokober uses hands-on STEAM learning, innovation clubs, and community programs to help learners build, design, and create solutions rooted in Acholi lived experience.</p>
@@ -700,7 +837,8 @@
 
     <!-- 4. River Poultry -->
     <section class="partner-section">
-        <div class="partner-card reverse">
+        <div class="partner-card">
+            <img src="logo\River.png" alt="River Poultry Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-drumstick-bite"></i>River <span class="highlight">Poultry</span></h2>
                 <p>River Poultry is transforming poultry farming in Northern Uganda with technology that strengthens farmer livelihoods and improves food security. Using AI-powered tools, the company helps farmers monitor flock health, access vaccinations, and manage farms efficiently, reducing mortality and lowering costs.</p>
@@ -715,6 +853,7 @@
     <!-- 5. Ajura Styles -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="logo\ajura.avif" alt="Ajura Styles Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-tshirt"></i>AJURA <span class="highlight">Styles</span></h2>
                 <p>Ajura Styles is rewriting fashion in Northern Uganda by proving that African clothing can be ethical, globally relevant, and deeply personal. In response to fast fashion and second-hand imports, Ajura creates locally produced garments using biodegradable linen, natural dyes, and eco-printing. The brand trains and employs young women in tailoring, dyeing, and printing, building real jobs and lasting skills.</p>
@@ -732,6 +871,7 @@
     <!-- 6. Afro Lab -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\afro.avif" alt="Afro Lab Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-music"></i>AFRO <span class="highlight">Lab</span></h2>
                 <p>Afro Lab is changing the rhythm of Gulu by creating a safe, inclusive space where young people can learn, create, and build futures through music and art. Blending traditional African storytelling with modern sounds, Afro Lab supports healing, self-expression, and skill-building for vulnerable youth. Their work has mentored young DJs and artists, built youth-led creative teams, and organized major community events.</p>
@@ -746,6 +886,7 @@
     <!-- 7. Christ Central Church -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/Christcentral1.avif" alt="Christ Central Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-church"></i>Christ Central <span class="highlight">Church</span></h2>
                 <p>Christ Central Community Church is a Gospel-centered church in Gulu, founded in 2019 to preach Christ with clarity and see lives transformed. The church reaches villages facing poverty and spiritual neglect through monthly outreach and Bible distribution, while also strengthening leaders through training and a radio ministry.</p>
@@ -762,6 +903,7 @@
     <!-- 8. Stress Clinic Uganda -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\stressclinic.avif" alt="Stress Clinic Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-brain"></i>Stress Clinic <span class="highlight">Uganda</span></h2>
                 <p>Stress Clinic Uganda is a mental health and community development organization serving marginalized communities in Northern Uganda through holistic care and support. Guided by "Rescue, Respond, Rejuvenate," the clinic offers counseling, mentorship, therapy, and digital support to youth, women, and refugees.</p>
@@ -779,6 +921,7 @@
     <!-- 9. Loremi Tours -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/LoremiTours1.avif" alt="Loremi Tours Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-compass"></i>LOREMI <span class="highlight">Tours</span></h2>
                 <p>Loremi Tours is a community-centered tourism company in Gulu that uses travel to create local jobs and celebrate Acholi culture. By designing immersive experiences - homestays, cultural activities, safaris, and community events - Loremi ensures tourism benefits women, artisans, guides, and hosts rather than outside interests. The company builds ethical, locally driven tourism that preserves cultural knowledge, generates reliable income, and connects visitors to real stories and everyday life.</p>
@@ -796,6 +939,7 @@
     <!-- 10. Bolcoms Ventures -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\bolcoms.avif" alt="Bolcoms Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-chart-line"></i>Bolcoms <span class="highlight">Ventures</span></h2>
                 <p>Bolcoms Ventures is strengthening Northern Uganda's digital and creative landscape by helping local businesses, nonprofits, and community groups be seen, trusted, and supported. Bolcoms provides design, printing, websites, media production, and ICT support. They also train youth in web design and digital skills, creating income pathways and professional opportunities.</p>
@@ -813,6 +957,7 @@
     <!-- 11. Backup Uganda -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="logo\backup.avif" alt="BackUp Uganda Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-child"></i>BackUp <span class="highlight">Uganda</span></h2>
                 <p>Backup Uganda is a non-profit dedicated to ensuring every child in Uganda, including those with learning difficulties and disabilities, receives the support they need to succeed. By training teachers, equipping families, and advocating for inclusive practices, Backup Uganda helps schools adapt teaching to meet diverse learning needs.</p>
@@ -827,6 +972,7 @@
     <!-- 12. Hashtag Gulu -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="partners/HashTag1.avif" alt="Hashtag Gulu Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-hashtag"></i>HASHTAG <span class="highlight">Gulu</span></h2>
                 <p>"Street kids" (or more considerately called kids who live and work on the street) are stigmatized by many in the community as violent criminals. But not by Hashtag Gulu. This group of young volunteers values these kids and wants to see them reach their highest potential. At Elephante, they have created a hub for mentorship, life skills, and vocational training with the end goal being to integrate them into society.</p>
@@ -844,6 +990,7 @@
     <!-- 13. Kijani Forestry -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/Kijani1.avif" alt="Kijani Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-tree"></i>Kijani <span class="highlight">Forestry</span></h2>
                 <p>Kijani Forestry Limited is a community-driven forestry company in Northern Uganda restoring landscapes and strengthening livelihoods through sustainable tree-planting and agroforestry systems. By placing smallholder farmers at the center, Kijani supports long-term land restoration and climate resilience while helping families diversify income.</p>
@@ -861,6 +1008,7 @@
     <!-- 14. NUFA -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="partners/NUFA1.avif" alt="NUFA Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-film"></i><span class="highlight">NUFA</span></h2>
                 <p>Northern Uganda Filmmakers Association (NUFA) unites filmmakers across the region, giving creatives a collective voice and the tools to tell authentic stories from their own communities. Through hands-on trainings, workshops, and professional guilds, NUFA equips members with practical skills in camera, editing, acting, and production, strengthening the local film ecosystem. By promoting regional talent through screenings and community engagement, NUFA inspires youth and builds opportunities for sustainable film careers.</p>
@@ -878,6 +1026,7 @@
     <!-- 15. Northern Oasis Spa -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/Northern1.avif" alt="Northern Oasis Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-spa"></i>Northern Oasis <span class="highlight">Spa</span></h2>
                 <p>Northern Oasis Spa is a wellness organization in Gulu bringing professional relaxation massage directly to people's homes and workplaces. Created to address the growing lack of time and access to self-care, the spa offers convenient, consistent, and personalized services for busy professionals, pregnant women, and athletes. Through door-to-door wellness care, Northern Oasis Spa helps clients recover, reduce stress, and improve overall health while building a trusted, local approach to wellbeing.</p>
@@ -892,6 +1041,7 @@
     <!-- 16. Kalokelo Studios -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="partners/kalokelo.avif" alt="Kalokelo Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-paint-brush"></i>KALOKELO <span class="highlight">Studios</span></h2>
                 <p>Kalokelo Studios is a community-based creative arts initiative in Gulu using art as a tool for healing, expression, and recovery. Working with children and youth affected by conflict, trauma, and substance abuse, the studio uses drawing, painting, theatre, dance, and storytelling to strengthen emotional resilience and rebuild confidence. Through public exhibitions, murals, and community drama, Kalokelo opens dialogue around mental health and reduces stigma, turning lived experience into positive community influence.</p>
@@ -906,6 +1056,7 @@
     <!-- 17. Mighty Youth Ministries -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="logo\mighty.avif" alt="Mighty Youth Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-users"></i>Mighty Youth <span class="highlight">Ministries</span></h2>
                 <p>Mighty Youth Ministries is a faith-based movement in Gulu mentoring young people through fellowship, school outreach, and honest conversation. Walking closely with youth facing school dropout, addiction, and teen pregnancy, they are shaping a generation that leads with clarity, integrity, resilience, and a strong sense of purpose.</p>
@@ -923,6 +1074,7 @@
     <!-- 18. Acta Event Designs -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="partners/Acta2.avif" alt="ACTA Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-calendar-alt"></i>ACTA <span class="highlight">Event Designs</span></h2>
                 <p>ACTA Design & Events is a creative production and design company providing professional event services, including lighting, sound, staging, and media production. By offering hands-on training in technical and creative skills, ACTA equips young people with real-world experience, creating employment opportunities and strengthening the region's creative economy.</p>
@@ -937,6 +1089,7 @@
     <!-- 19. Mtindo Designs -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/Mtindo1.avif" alt="Mtindo Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-tshirt"></i>MTINDO <span class="highlight">Designs</span></h2>
                 <p>Mtindo is a women-led social enterprise in Uganda that turns training into real employment through a hybrid tailoring academy and production studio. Women - especially early school leavers and unemployed youth - learn practical skills, gain hands-on experience, and move into dignified work that earns income and builds independence. Profits from production are reinvested to train more women, creating a self-sustaining cycle of opportunity.</p>
@@ -954,6 +1107,7 @@
     <!-- 20. Agamega -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\agamega.avif" alt="Agamega Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-seedling"></i><span class="highlight">AGAMEGA</span></h2>
                 <p>While most of the urban population is moving away from farming, Deo, founder of Agamega Agro Enterprise, is innovating it and dare we say, making it trendy again. Deo is pursuing crops others shy away from, like oyster mushrooms, and he is sharing his experience and knowledge with other members of the community so they can also create their own successful farm. Deo isn't afraid to think big and we know farming in Uganda will be carried further with him around.</p>
@@ -968,6 +1122,7 @@
     <!-- 21. Ribbo Coffee -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/Ribbo1.avif" alt="Ribbo Coffee Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-mug-hot"></i>RIBBO <span class="highlight">Coffee</span></h2>
                 <p>Ribbo Coffee is a Northern Uganda coffee enterprise building a stronger, more sustainable coffee economy by working directly with farmers and partners to improve quality, fairness, and production standards. The company offers roasting, green and roasted bean sales, white-label coffee, and immersive coffee experiences that connect people to ethical farming from seed to cup. With a focus on consistency, environmental care, and farmer dignity, Ribbo Coffee is shaping a future where great coffee supports thriving communities and a healthier landscape.</p>
@@ -985,6 +1140,7 @@
     <!-- 22. Watwero Dance Initiative -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="partners/watwero1.avif" alt="Watwero Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-dance"></i>WATWERO <span class="highlight">Dance Initiative</span></h2>
                 <p>Watwero Dance Initiative is a creative arts organization in Northern Uganda that uses dance and cultural storytelling to help trauma-affected youth heal, express themselves, and build community. Guided by the philosophy of "Watwero" ("We Can"), the initiative was shaped by Geoffrey Oryema's journey of survival and healing through dance. By training and employing local creatives and running community dance programs, Watwero turns performance into healing, dialogue, and opportunity - proving that culture and creativity can rebuild lives after conflict.</p>
@@ -1002,6 +1158,7 @@
     <!-- 23. Dan's Meat Ltd -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/Dan'sMeat.avif" alt="Dan's Meat Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-drumstick-bite"></i>Dan's Meat <span class="highlight">Ltd</span></h2>
                 <p>Dan's Meat Ltd is a fresh meat store in Gulu providing safe, high-quality poultry, beef, and pork to families and businesses across Northern Uganda. In a region where poor meat quality can lead to illness, Dan's Meat ensures strict hygiene and transparency, building trust through consistent products and customer education. By serving restaurants, cafés, and households with reliable, affordable meat, the company strengthens community health and food safety while expanding access to quality protein.</p>
@@ -1019,6 +1176,7 @@
     <!-- 24. VISO -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="partners/VISO1.avif" alt="VISO Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-hands-helping"></i><span class="highlight">VISO</span></h2>
                 <p>Voluntary Initiative Support Organisation (VISO) is a community-rooted organization founded by young volunteers in 2005 to support recovery in Northern Uganda. Through programs in livelihoods, education, peacebuilding, and climate resilience, VISO equips communities to lead sustainable, locally driven development.</p>
@@ -1036,6 +1194,7 @@
     <!-- 25. INK Liners -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="logo\inkliners.avif" alt="INK Liners Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-pen-fancy"></i>INK <span class="highlight">Liners</span></h2>
                 <p>INK Liners is a space for creatives to share their art with the world. Hosting events on a regular basis, you will see a wide variety of performances from spoken word poetry, to dances, to music, and there's always a few surprises too!</p>
@@ -1053,6 +1212,7 @@
     <!-- 26. Scratch Upcycling -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\scratch.avif" alt="Scratch Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-recycle"></i>Scratch <span class="highlight">Upcycling</span></h2>
                 <p>Scratch Upcycling is a creative initiative in Gulu turning glass bottles into beautiful, functional products - proving that waste can be transformed into value. By collecting discarded glass from homes and streets, the team makes cups, candle holders, and other everyday items, creating income opportunities while reducing waste. Built on the belief that solutions can be simple and community-led, Scratch Upcycling is building a future where glass is consistently reused, valued, and part of a circular, sustainable economy.</p>
@@ -1070,6 +1230,7 @@
     <!-- 27. Takataka -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/takataka1.avif" alt="Takataka Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-trash-alt"></i><span class="highlight">TAKATAKA</span></h2>
                 <p>Did you know that 91% of the world's plastic is NOT recycled? Takataka is very aware of this issue and they are doing something about it! They are developing technology that is safely processing plastic waste in areas where waste is currently being burned or littered. You can buy recycled products like wall tiles or chairs from this! And to top it off, they are able to employ marginalized people groups, creating opportunities for healing for trauma survivors.</p>
@@ -1087,6 +1248,7 @@
     <!-- 28. Lumi Solar -->
     <section class="partner-section">
         <div class="partner-card reverse">
+            <img src="logo\lumi solar.avif" alt="Lumi Solar Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-sun"></i>LUMI <span class="highlight">Solar</span></h2>
                 <p>Lumi Solar is a renewable energy company delivering reliable, high-quality, and affordable solar solutions across Uganda. Specializing in system design, installation, maintenance, power audits, and backup power, Lumi Solar serves NGOs, institutions, and communities. By creating local jobs, supporting long-term partners, and replacing polluting energy sources, the company strengthens both the economy and the environment while ensuring communities have consistent, sustainable access to clean energy.</p>
@@ -1104,6 +1266,7 @@
     <!-- 29. Elevate Water -->
     <section class="partner-section">
         <div class="partner-card">
+            <img src="partners/elevate1.avif" alt="Elevate Water Logo" class="card-logo" onerror="this.style.display='none'">
             <div class="text">
                 <h2><i class="fas fa-tint"></i>Elevate <span class="highlight">Water</span></h2>
                 <p>With the sole mission of getting affordable, clean drinking water into the homes of everyone in Gulu, Elevate Water is a self-sustaining business selling clean drinking water in reusable bottles. You can order your water from Elephante anytime! The Elevate Team is also spearheading a project building protected spring wells in the vulnerable areas of Gulu City, providing clean drinking water to thousands of people.</p>
